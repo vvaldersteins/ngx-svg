@@ -1,0 +1,25 @@
+{
+  "name": "ngx-svg",
+  "version": "1.0.0",
+  "description": "Angular Library for creating SVG elements.",
+  "main": "release/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvaldersteins/ngx-svg.git"
+  },
+  "keywords": [
+    "SVG",
+    "Angular",
+    "ngx-svg",
+    "ng"
+  ],
+  "author": "Valters Valdersteins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vvaldersteins/ngx-svg/issues"
+  },
+  "homepage": "https://github.com/vvaldersteins/ngx-svg#readme"
+}

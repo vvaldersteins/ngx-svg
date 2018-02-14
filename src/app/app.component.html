@@ -1,0 +1,14 @@
+<svg-container containerId="test">
+  <svg-rect [width]="width" height="200" color="red"></svg-rect>
+  <svg-circle [radius]="radius" color="yellow" x="200"></svg-circle>
+  <svg-ellipse [width]="width" height="100" color="blue" x="200"></svg-ellipse>
+  <svg-line x0="400" x1="500" y0="0" y1="100" borderSize="4" borderColor="brown"></svg-line> 
+  <svg-polyline [points]="[[500, 10], [600, 100], [500, 200], [400, 100]]" fill="none" borderSize="4" borderColor="green"></svg-polyline>
+  <svg-polygon [points]="[[700, 10], [800, 100], [700, 200], [600, 100]]" fill="pink" borderSize="4" borderColor="pink"></svg-polygon>
+</svg-container>
+
+<label>Width</label>
+<input type="number" [(ngModel)]="width" />
+
+<label>Radius</label>
+<input type="number" [(ngModel)]="radius" />

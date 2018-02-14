@@ -71,17 +71,126 @@ containerId: Unique id for the svg container. Will be used for drawing the svg c
 
 # Elements
 
+You can enter as many svg elements as you want per one container. See below the information about the configuration of these elements.
+
 ## Line
+
+To add a line element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-line></svg-line> 
+```
+
+You can provide following parameters for the element
+
+```
+  borderSize: Numeric value with size of the border. (MANDATORY)
+  borderColor: Color of the border. (OPTIONAL, Defaults to '#000')
+  x0: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y0: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  x1: Ending point on x axis. (OPTIONAL, Defaults to 1)
+  y1: Ending point on y axis (OPTIONAL, Defaults to 1)
+```
 
 ## Rectangular
 
+To add a rectangular element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-rect></svg-rect> 
+```
+
+You can provide following parameters for the element
+
+```
+  height: Height of the rectangular. (MANDATORY)
+  width: Width of the rectangular. (MANDATORY)
+  color: Background color of the rectangular. (OPTIONAL, Defaults to '#000')
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+```
+
 ## Circle
 
-## Ellipsis
+To add a circle element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-circle></svg-circle> 
+```
+
+You can provide following parameters for the element
+
+```
+  radius: Radius of the circle. (MANDATORY)
+  color: Background color of the circle. (OPTIONAL, Defaults to '#000')
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+```
+
+## Ellipse
+
+To add an ellipse element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-ellipse></svg-ellipse> 
+```
+
+You can provide following parameters for the element
+
+```
+  height: Height of the ellipse. (MANDATORY)
+  width: Width of the ellipse. (MANDATORY)
+  color: Background color of the ellipse. (OPTIONAL, Defaults to '#000')
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+```
 
 ## Polyline
 
+To add a polyline element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-polyline></svg-polyline> 
+```
+
+You can provide following parameters for the element
+
+```
+  points: Array with an array of x,y points. E.g. [[0, 50], [50, 100], [100, 50], [50, 0], [0, 50]]. (MANDATORY)
+  borderSize: Size of the border for the polyline. (MANDATORY)
+  borderColor: Border color of the polyline. (OPTIONAL, Defaults to '#000')
+  fill: Background color of the polyline. (OPTIONAL, Defaults to '#000')
+```
+
 ## Polygon
+
+To add a polygon element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-polygon></svg-polygon> 
+```
+
+You can provide following parameters for the element
+
+```
+  points: Array with an array of x,y points. E.g. [[0, 50], [50, 100], [100, 50], [50, 0]]. (MANDATORY)
+  borderSize: Size of the border for the polyline. (MANDATORY)
+  borderColor: Border color of the polyline. (OPTIONAL, Defaults to '#000')
+  fill: Background color of the polyline. (OPTIONAL, Defaults to '#000')
+```
+
+## Events
+
+Each of the above elements has a list of events that are available to be attached.
+
+```
+  clickEvent: Is fired when click event happens on the element.
+  doubleClickEvent: Is fired when double click event happens on the element.
+  mouseOverElement: Is fired when mouse is moved over the element.
+  mouseOutElement: Is fired when mouse is moved out of the element.
+```
+
+Each of the events returns an instance of `MouseEvent`.
 
 # Demo
 

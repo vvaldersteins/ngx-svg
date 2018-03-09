@@ -67,6 +67,7 @@ Below are explanation of input and output parameters:
 
 ```
 containerId: Unique id for the svg container. Will be used for drawing the svg container. (MANDATORY)
+height: Height of the svg container. (OPTIONAL, Defaults to 200)
 ```
 
 # Elements

@@ -62,6 +62,20 @@ export class LineComponent {
   }
 
   /**
+   * Retrieves the maximum height of all elements.
+   * @returns Height of the container.
+   */
+  getHeight(): number {
+    return Math.max.apply(Math, this.lines.map(el => {
+      if (el.y0 > el.y1) {
+        return el.y0;
+      } else {
+        return el.y1;
+      }
+    })) + 20;
+  }
+
+  /**
    * removes specific line element.
    */
   removeRow(index: number) {

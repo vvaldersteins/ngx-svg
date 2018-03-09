@@ -9,7 +9,7 @@
   <div class="row no-gutters">
     <div class="col-12">
       <!-- Svg Container with lines -->
-      <svg-container containerId="line">
+      <svg-container containerId="line" [height]="getHeight()">
         <svg-line [borderSize]="line.borderSize" [borderColor]="line.borderColor"
           [x0]="line.x0" [y0]="line.y0" [x1]="line.x1" [y1]="line.y1" *ngFor="let line of lines"></svg-line>
       </svg-container>

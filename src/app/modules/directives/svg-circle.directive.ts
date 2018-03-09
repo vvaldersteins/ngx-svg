@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -16,7 +16,7 @@ import { SvgContainerComponent } from '../components/svg-container/svg-container
 @Directive({
   selector: 'svg-circle'
 })
-export class SvgCircleDirective implements AfterViewChecked {
+export class SvgCircleDirective implements AfterViewChecked, OnDestroy {
   /**
    * Globally used variables within the directive.
    */
@@ -83,5 +83,12 @@ export class SvgCircleDirective implements AfterViewChecked {
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+  }
+
+  /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy() {
+    this._circle.remove();
   }
 }

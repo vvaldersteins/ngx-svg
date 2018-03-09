@@ -51,6 +51,14 @@ export class RectComponent {
   }
 
   /**
+   * Retrieves the maximum height of all elements.
+   * @returns Height of the container.
+   */
+  getHeight(): number {
+    return Math.max.apply(Math, this.rectangulars.map(el => el.height + el.y)) + 20;
+  }
+
+  /**
    * removes specific rectangular element.
    */
   removeRow(index: number) {

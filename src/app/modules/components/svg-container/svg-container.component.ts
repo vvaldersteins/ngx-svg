@@ -23,6 +23,7 @@ export class SvgContainerComponent implements AfterViewInit {
    * Input variables used within the component.
    */
   @Input() containerId: string; // Container id which will be used to create the container.
+  @Input() height = 200; // Height of the container.
 
   /**
    * Create SVG Container component instance.

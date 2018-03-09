@@ -49,6 +49,14 @@ export class CircleComponent {
   }
 
   /**
+   * Retrieves the maximum height of all elements.
+   * @returns Height of the container.
+   */
+  getHeight(): number {
+    return Math.max.apply(Math, this.circles.map(el => el.radius * 2 + el.y)) + 20;
+  }
+
+  /**
    * removes specific circle element.
    */
   removeRow(index: number) {

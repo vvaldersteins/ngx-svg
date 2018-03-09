@@ -51,6 +51,14 @@ export class EllipseComponent {
   }
 
   /**
+   * Retrieves the maximum height of all elements.
+   * @returns Height of the container.
+   */
+  getHeight(): number {
+    return Math.max.apply(Math, this.ellipses.map(el => el.height * 2 + el.y)) + 20;
+  }
+
+  /**
    * removes specific ellipses element.
    */
   removeRow(index: number) {

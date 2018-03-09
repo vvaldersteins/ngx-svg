@@ -9,7 +9,7 @@
   <div class="row no-gutters">
     <div class="col-12">
       <!-- Svg Container with circles -->
-      <svg-container containerId="circle">
+      <svg-container containerId="circle" [height]="getHeight()">
         <svg-circle [radius]="circle.radius" [color]="circle.color"
           [x]="circle.x" [y]="circle.y" *ngFor="let circle of circles"></svg-circle>
       </svg-container>

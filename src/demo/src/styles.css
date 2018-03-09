@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+a.nav-link.active {
+  color: #e83e8c;
+}

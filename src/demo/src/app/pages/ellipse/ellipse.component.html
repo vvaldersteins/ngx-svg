@@ -9,7 +9,7 @@
   <div class="row no-gutters">
     <div class="col-12">
       <!-- Svg Container with ellipses -->
-      <svg-container containerId="ellipse">
+      <svg-container containerId="ellipse" [height]="getHeight()">
         <svg-ellipse [height]="ellipse.height" [width]="ellipse.width" [color]="ellipse.color"
           [x]="ellipse.x" [y]="ellipse.y" *ngFor="let ellipse of ellipses"></svg-ellipse>
       </svg-container>

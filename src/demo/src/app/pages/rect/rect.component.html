@@ -9,7 +9,7 @@
   <div class="row no-gutters">
     <div class="col-12">
       <!-- Svg Container with rectangulars -->
-      <svg-container containerId="rectangular">
+      <svg-container containerId="rectangular" [height]="getHeight()">
         <svg-rect [height]="rectangular.height" [width]="rectangular.width" [color]="rectangular.color"
           [x]="rectangular.x" [y]="rectangular.y" *ngFor="let rectangular of rectangulars"></svg-rect>
       </svg-container>

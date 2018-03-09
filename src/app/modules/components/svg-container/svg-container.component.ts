@@ -7,6 +7,7 @@ import { Component, AfterViewInit, Input } from '@angular/core';
  * Import third-party libraries.
  */
 import * as SVG from 'svgjs';
+const svgFunc = SVG;
 
 @Component({
   selector: 'svg-container',
@@ -40,7 +41,7 @@ export class SvgContainerComponent implements AfterViewInit {
    * @param id - ID of the container.
    */
   setContainer(id: string) {
-    this._svg = SVG(id);
+    this._svg = svgFunc(id);
   }
 
   /**

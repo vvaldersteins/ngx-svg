@@ -1,0 +1,72 @@
+<!-- Header of the circle -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Circle</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with circles -->
+      <svg-container containerId="circle">
+        <svg-circle [radius]="circle.radius" [color]="circle.color"
+          [x]="circle.x" [y]="circle.y" *ngFor="let circle of circles"></svg-circle>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg Circle configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Radius</th>
+              <th>Color</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="circles.length > 0">
+              <tr *ngFor="let circle of circles; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="circle.radius" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="circle.color" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="circle.x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="circle.y" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="circles.length === 0">
+              <td colspan="7" class="text-center">
+                There are no circles
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New circle</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<!-- Header of the line -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Line</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with lines -->
+      <svg-container containerId="line">
+        <svg-line [borderSize]="line.borderSize" [borderColor]="line.borderColor"
+          [x0]="line.x0" [y0]="line.y0" [x1]="line.x1" [y1]="line.y1" *ngFor="let line of lines"></svg-line>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg line configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Border Size</th>
+              <th>Border Color</th>
+              <th>X Start position</th>
+              <th>Y Start position</th>
+              <th>X End position</th>
+              <th>Y End position</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="lines.length > 0">
+              <tr *ngFor="let line of lines; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="line.borderSize" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="line.borderColor" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="line.x0" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="line.y0" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="line.x1" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="line.y1" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="lines.length === 0">
+              <td colspan="7" class="text-center">
+                There are no lines
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New line</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,694 @@
+<!-- Header of the home -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">ngx-svg</h1>
+    <p class="lead text-center">Create powerful SVG objects with <a href="https://angular.io" target="_blank">Angular</a>. Based on <a href="http://svgjs.com" target="_blank">svg.js</a> library.</p>
+  </div>
+</div>
+
+<!-- Content of the home -->
+<div class="row no-gutters">
+  <div class="col-12 col-sm-4 col-md-2">
+    <div class="nav flex-column" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" data-toggle="pill" href="#getting-started" role="tab" aria-controls="getting-started" aria-selected="true">Getting Started</a>
+      <a class="nav-link" data-toggle="pill" href="#installation" role="tab" aria-controls="installation" aria-selected="false">Installation</a>
+      <a class="nav-link" data-toggle="pill" href="#container" role="tab" aria-controls="container" aria-selected="false">Container</a>
+      <a class="nav-link" data-toggle="pill" href="#line" role="tab" aria-controls="line" aria-selected="false">Line</a>
+      <a class="nav-link" data-toggle="pill" href="#rectangular" role="tab" aria-controls="rectangular" aria-selected="false">Rectangular</a>
+      <a class="nav-link" data-toggle="pill" href="#circle" role="tab" aria-controls="circle" aria-selected="false">Circle</a>
+      <a class="nav-link" data-toggle="pill" href="#ellipse" role="tab" aria-controls="ellipse" aria-selected="false">Ellipse</a>
+      <a class="nav-link" data-toggle="pill" href="#polyline" role="tab" aria-controls="polyline" aria-selected="false">Polyline</a>
+      <a class="nav-link" data-toggle="pill" href="#polygon" role="tab" aria-controls="polygon" aria-selected="false">Polygon</a>
+      <a class="nav-link" data-toggle="pill" href="#troubleshooting" role="tab" aria-controls="troubleshooting" aria-selected="false">Troubleshooting</a>
+      <a class="nav-link" data-toggle="pill" href="#license" role="tab" aria-controls="license" aria-selected="false">License</a>
+    </div>
+  </div>
+  <div class="col-12 col-sm-8 col-md-10">
+    <div class="tab-content">
+      <!-- Getting started tab -->
+      <div class="tab-pane fade show active" id="getting-started" role="tabpanel">
+        <h2>Getting Started</h2>
+        <p>ngx-svg contains all core svg.js components, so you won't need to include any other external dependencies.</p>
+      </div>
+
+      <!-- Installation tab -->
+      <div class="tab-pane fade" id="installation" role="tabpanel">
+        <h2>Installation</h2>
+        <p>
+          To install ngx-svg, you have to run the following command from the terminal (you have to be within the project folder) -
+          <code>npm install ngx-svg --save</code>
+        </p>
+        <p>This will install the latest version of ngx-svg and add it to your project dependency list.</p>
+        <p>
+          After the installation you have to include the component in your module by importing it using the following command -
+          <code>import {{ '{' }} NgxSvgModule {{ '}' }} from 'ngx-svg';</code>
+        </p>
+        <p>Finally you have to add the <code>NgxSvgModule</code> to the imports of your module: </p>
+        <code>
+          @NgModule({{ '{' }}<br />
+            &emsp;declarations: [<br />
+              &emsp;&emsp;...<br />
+            &emsp;],<br />
+            &emsp;imports: [<br />
+              &emsp;&emsp;...<br />
+              &emsp;&emsp;NgxSvgModule<br />
+            &emsp;],<br />
+            &emsp;providers: [..],<br />
+            &emsp;bootstrap: [...]<br />
+          {{ '}' }})<br />
+          export class AppModule {{ '{' }} {{ '}' }}
+        </code>
+        <p></p>
+        <p>Afterwards you should be able to use the library in your application.</p>
+      </div>
+
+      <!-- Container tab -->
+      <div class="tab-pane fade" id="container" role="tabpanel">
+        <h2>Container</h2>
+        <p>
+          To start using the ngx-svg you must declare a container object in one of your views, by using the following element:
+        </p>
+        <code>
+          &lt;svg-container containerId="svg-element"&gt;<br />
+            &emsp;...<br />
+          &lt;/svg-container&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>containerId</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Unique ID for the svg container. Will be used for drawing the svg elements.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Within one container you can enter as many elements as you want.</p>
+      </div>
+
+      <!-- Line tab -->
+      <div class="tab-pane fade" id="line" role="tabpanel">
+        <h2>Line</h2>
+        <p>
+          To add a line element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-line&gt; &lt;/svg-line&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the line.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>borderSize</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Numeric value with the size of the border.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>borderColor</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Color of the border (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>x0</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>y0</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>x1</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Ending point on the x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>y1</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Ending point on the y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>10</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rectangular tab -->
+      <div class="tab-pane fade" id="rectangular" role="tabpanel">
+        <h2>Rectangular</h2>
+        <p>
+          To add a rectangular element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-rect&gt; &lt;/svg-rect&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the rectangular.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>height</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Height of the rectangular.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>width</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Width of the rectangular.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>color</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Background color of the rectangular (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>x</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>y</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Circle tab -->
+      <div class="tab-pane fade" id="circle" role="tabpanel">
+        <h2>Circle</h2>
+        <p>
+          To add a circle element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-circle&gt; &lt;/svg-circle&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the circle.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>radius</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Radius of the circle.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>color</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Background color of the circle (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>x</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>y</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Ellipse tab -->
+      <div class="tab-pane fade" id="ellipse" role="tabpanel">
+        <h2>Ellipse</h2>
+        <p>
+          To add a ellipse element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-ellipse&gt; &lt;/svg-ellipse&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the ellipse.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>height</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Height of the ellipse.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>width</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Width of the ellipse.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>color</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Background color of the ellipse (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>x</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>y</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on the y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Polyline tab -->
+      <div class="tab-pane fade" id="polyline" role="tabpanel">
+        <h2>Polyline</h2>
+        <p>
+          To add a polyline element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-polyline&gt; &lt;/svg-polyline&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the polyline.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>points</td>
+              <td>Input parameter <code>(Array)</code></td>
+              <td>Array with an array of x,y points. For example [[0, 50], [50, 100], [100, 50], [50, 0], [0, 50]].</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>borderSize</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Size of the border for the polyline.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>borderColor</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Border color of the polyline (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>fill</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Fill color of the polyline (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Polygon tab -->
+      <div class="tab-pane fade" id="polygon" role="tabpanel">
+        <h2>Polygon</h2>
+        <p>
+          To add a polygon element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-polygon&gt; &lt;/svg-polygon&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the polygon.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>points</td>
+              <td>Input parameter <code>(Array)</code></td>
+              <td>Array with an array of x,y points. For example [[0, 50], [50, 100], [100, 50], [50, 0], [0, 50]].</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>borderSize</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Size of the border for the polygon.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>borderColor</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Border color of the polygon (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>fill</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Fill color of the polygon (name, HEX, rgb).</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>mouseOverElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOutElement</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Troubleshooting tab -->
+      <div class="tab-pane fade" id="troubleshooting" role="tabpanel">
+        <h2>Troubleshooting</h2>
+        <p>In case of any questions or issues, please open a new question / issue on our <a href="https://github.com/vvaldersteins/ngx-svg/issues" target="_blank">GitHub repository</a>.</p>
+      </div>
+
+      <!-- License tab -->
+      <div class="tab-pane fade" id="license" role="tabpanel">
+        <h2>License</h2>
+        <p>ngx-svg is developed under MIT license.</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<!-- Header of the ellipse -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Ellipse</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with ellipses -->
+      <svg-container containerId="ellipse">
+        <svg-ellipse [height]="ellipse.height" [width]="ellipse.width" [color]="ellipse.color"
+          [x]="ellipse.x" [y]="ellipse.y" *ngFor="let ellipse of ellipses"></svg-ellipse>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg Ellipse configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Height</th>
+              <th>Width</th>
+              <th>Color</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="ellipses.length > 0">
+              <tr *ngFor="let ellipse of ellipses; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="ellipse.height" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="ellipse.width" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="ellipse.color" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="ellipse.x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="ellipse.y" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="ellipses.length === 0">
+              <td colspan="7" class="text-center">
+                There are no ellipses
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New ellipse</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

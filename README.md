@@ -63,7 +63,7 @@ To start using the ngx-svg you must declare a container object in your view, by 
 
 ```
 
-Below are explanation of import and output variables:
+Below are explanation of input and output parameters:
 
 ```
 containerId: Unique id for the svg container. Will be used for drawing the svg container. (MANDATORY)
@@ -174,9 +174,9 @@ You can provide following parameters for the element
 
 ```
   points: Array with an array of x,y points. E.g. [[0, 50], [50, 100], [100, 50], [50, 0]]. (MANDATORY)
-  borderSize: Size of the border for the polyline. (MANDATORY)
-  borderColor: Border color of the polyline. (OPTIONAL, Defaults to '#000')
-  fill: Background color of the polyline. (OPTIONAL, Defaults to '#000')
+  borderSize: Size of the border for the polygon. (MANDATORY)
+  borderColor: Border color of the polygon. (OPTIONAL, Defaults to '#000')
+  fill: Background color of the polygon. (OPTIONAL, Defaults to '#000')
 ```
 
 ## Events
@@ -194,7 +194,7 @@ Each of the events returns an instance of `MouseEvent`.
 
 # Demo
 
-You can view demo via this link, and browse the code here.
+You can view demo via this [link](https://vvaldersteins.github.io/ngx-svg/), and browse the code [here](https://github.com/vvaldersteins/ngx-svg/tree/master/src/demo).
 
 # Troubleshooting
 

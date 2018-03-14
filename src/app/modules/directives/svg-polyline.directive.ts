@@ -65,6 +65,7 @@ export class SvgPolylineDirective implements AfterViewChecked, OnDestroy {
   updatePolyline() {
     this._polyline
       .plot(this.points) // Update the polyline object
+      .fill(this.fill) // Fill color of the polyline
       .stroke({ color: this.borderColor, width: this.borderSize }); // Set the border for the polyline
   }
 

@@ -65,6 +65,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnDestroy {
   updatePolygon() {
     this._polygon
       .plot(this.points) // Update the polygon object
+      .fill(this.fill) // Fill color of the polygon
       .stroke({ color: this.borderColor, width: this.borderSize }); // Set the border for the polygon
   }
 

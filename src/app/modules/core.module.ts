@@ -2,6 +2,7 @@
  * Import Angular Libraries.
  */
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 /**
  * Import custom components.
@@ -19,7 +20,9 @@ import { SvgPolylineDirective } from './directives/svg-polyline.directive';
 import { SvgPolygonDirective } from './directives/svg-polygon.directive';
 
 @NgModule({
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   exports: [
     SvgContainerComponent,
     SvgRectDirective,

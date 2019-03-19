@@ -1,0 +1,12 @@
+.grid {
+  background: url('assets/images/grid.png');
+}
+
+.hover-point {
+  background-color: black;
+  border: 1px solid #fff;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  border-radius: 50%;
+}

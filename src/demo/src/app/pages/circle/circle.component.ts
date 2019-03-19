@@ -57,7 +57,8 @@ export class CircleComponent {
   }
 
   /**
-   * removes specific circle element.
+   * Removes specific circle element.
+   * @param index - Index of circle, which needs to be removed.
    */
   removeRow(index: number) {
     this.circles.splice(index, 1);

@@ -2,3 +2,7 @@
 a.nav-link.active {
   color: #e83e8c;
 }
+
+.extra-small {
+  font-size: 9px;
+}

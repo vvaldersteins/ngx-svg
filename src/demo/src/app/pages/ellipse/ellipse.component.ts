@@ -59,7 +59,8 @@ export class EllipseComponent {
   }
 
   /**
-   * removes specific ellipses element.
+   * Removes specific ellipses element.
+   * @param index - Index of ellipse, which needs to be removed.
    */
   removeRow(index: number) {
     this.ellipses.splice(index, 1);

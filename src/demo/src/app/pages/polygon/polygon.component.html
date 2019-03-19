@@ -1,6 +1,102 @@
 <!-- Header of the polygon -->
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4 text-center">Polygon (Under construction)</h1>
+    <h1 class="display-4 text-center">Polygon</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with lines -->
+      <svg-container containerId="polygon" [height]="getHeight()">
+        <svg-polygon [borderSize]="polygon.borderSize" [borderColor]="polygon.borderColor"
+          [fill]="polygon.fill" [points]="polygon.points" *ngFor="let polygon of polygons"></svg-polygon>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg line configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Border Size</th>
+              <th>Border Color</th>
+              <th>Fill Color</th>
+              <th class="text-center">Points</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="polygons.length > 0">
+              <tr *ngFor="let polygon of polygons; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td class="align-middle">
+                  <input type="number" [(ngModel)]="polygon.borderSize" class="form-control" />
+                </td>
+                <td class="align-middle">
+                  <input type="string" [(ngModel)]="polygon.borderColor" class="form-control" />
+                </td>
+                <td class="align-middle">
+                  <input type="string" [(ngModel)]="polygon.fill" class="form-control" />
+                </td>
+                <td>
+                  <tr>
+                    <th>X point</th>
+                    <th>Y point</th>
+                    <th>Actions</th>
+                  </tr>
+
+                  <ng-container *ngIf="polygon.points.length > 0">
+                    <tr *ngFor="let point of polygon.points; let pointIndex = index;">
+                      <td>
+                        <input type="number" [(ngModel)]="point[0]" class="form-control" />
+                      </td>
+                      <td>
+                        <input type="number" [(ngModel)]="point[1]" class="form-control" />
+                      </td>
+                      <td>
+                        <button class="btn btn-danger" (click)="removePoint(polygon, pointIndex)">Remove</button>
+                      </td>
+                    </tr>
+                  </ng-container>
+
+                  <tr *ngIf="polygon.points.length === 0">
+                    <td colspan="3">
+                      There are no points for this polygon
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="3">
+                      <button class="btn btn-success float-right" (click)="addNewPoint(polygon)">Add New Point</button>
+                    </td>
+                  </tr>
+                </td>
+                <td class="align-middle">
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="polygons.length === 0">
+              <td colspan="6" class="text-center">
+                There are no polygons
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="6">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New polygon</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

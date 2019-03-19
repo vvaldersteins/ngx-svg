@@ -59,7 +59,8 @@ export class RectComponent {
   }
 
   /**
-   * removes specific rectangular element.
+   * Removes specific rectangular element.
+   * @param index - Index of rectangular element, which needs to be removed.
    */
   removeRow(index: number) {
     this.rectangulars.splice(index, 1);

@@ -76,7 +76,8 @@ export class LineComponent {
   }
 
   /**
-   * removes specific line element.
+   * Removes specific line element.
+   * @param index - Index of a line which needs to be removed.
    */
   removeRow(index: number) {
     this.lines.splice(index, 1);

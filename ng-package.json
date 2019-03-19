@@ -3,5 +3,6 @@
   "lib": {
     "entryFile": "ngx_svg.ts",
     "embedded": []
-  }
+  },
+  "whitelistedNonPeerDependencies": ["svgjs", "rxjs-compat"]
 }

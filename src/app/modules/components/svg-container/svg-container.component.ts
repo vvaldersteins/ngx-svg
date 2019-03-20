@@ -22,6 +22,7 @@ export class SvgContainerComponent implements AfterViewInit {
   public pointXCoordinate: number;
   public pointYCoordinate: number;
   public mouseInContainer = false;
+  private _triggerCoordinateChange = false;
 
   /**
    * Input variables used within the component.
@@ -30,11 +31,12 @@ export class SvgContainerComponent implements AfterViewInit {
   @Input() height = 200; // Height of the container.
   @Input() showGrid = false; // Indicator if grid image should be shown in the background of svg container.
   @Input() hoverable = false; // Indicator if user should be able to see dot on hover, to capture coordinates.
+  @Input() pointSize = 10; // Numeric value in pixels, to indicate how large should the point be.
 
   /**
    * Output variables used within the component.
    */
-  @Output() clickEvent: EventEmitter<MouseEvent> = new EventEmitter(); // Event handler for retrieving coordinates at clicked position
+  @Output() clickEvent: EventEmitter<{ x: number, y: number }> = new EventEmitter(); // Event handler for retrieving coordinates at clicked position
 
   /**
    * Create SVG Container component instance.
@@ -59,8 +61,27 @@ export class SvgContainerComponent implements AfterViewInit {
     }
 
     // Set correct point coordinates
-    this.pointXCoordinate = event.x - 5;
-    this.pointYCoordinate = event.y - 5;
+    if (this._triggerCoordinateChange) {
+      this.pointXCoordinate = event.layerX - this.pointSize / 2;
+      this.pointYCoordinate = event.layerY - this.pointSize / 2;
+    }
+
+    // Trigger coordinate change
+    this._triggerCoordinateChange = true;
+  }
+
+  /**
+   * Does all required pre-requisites when hovered point is clicked.
+   */
+  onPointClick() {
+    this.clickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
+  }
+
+  /**
+   * Make sure that we don't trigger coordinate change, if we hover point.
+   */
+  onPointHover() {
+    this._triggerCoordinateChange = false;
   }
 
   /**

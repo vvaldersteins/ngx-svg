@@ -70,6 +70,7 @@ containerId: Unique id for the svg container. Will be used for drawing the svg c
 height: Height of the svg container. (OPTIONAL, Defaults to 200)
 showGrid: Indicator if grid image should be shown in the background of svg container. (OPTIONAL, Defaults to false)
 hoverable: Indicator if user should be able to see dot on hover, to capture coordinates. (OPTIONAL, Defaults to false)
+pointSize: Numeric value in pixels, to indicate how large should the point be. (OPTIONAL, Defaults to 10)
 clickEvent: Is fired when click event happens on the hovered point element. Must have hoverable option enabled. (OUTPUT PARAMETER)
 ```
 

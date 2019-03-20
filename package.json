@@ -1,6 +1,6 @@
 {
   "name": "ngx-svg",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Angular Library for creating SVG elements.",
   "license": "MIT",
   "scripts": {
@@ -32,9 +32,7 @@
     "@angular/core": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
   },
   "dependencies": {
-    "svgjs": "^2.6.2",
-    "tslib": "^1.9.0",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "svgjs": "^2.6.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
@@ -53,6 +51,7 @@
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
+    "acorn": "^6.1.1",
     "codelyzer": "^4.5.0",
     "core-js": "^2.4.1",
     "jasmine-core": "~2.8.0",
@@ -65,8 +64,10 @@
     "ng-packagr": "^4.7.1",
     "protractor": "~5.1.2",
     "rxjs": "^6.4.0",
+    "rxjs-compat": "^6.0.0-rc.0",
     "ts-node": "~4.1.0",
     "tsickle": "^0.34.3",
+    "tslib": "^1.9.0",
     "tslint": "~5.9.1",
     "typescript": "~3.2.4",
     "zone.js": "^0.8.29"

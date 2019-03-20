@@ -19,6 +19,7 @@
       <a class="nav-link" data-toggle="pill" href="#ellipse" role="tab" aria-controls="ellipse" aria-selected="false">Ellipse</a>
       <a class="nav-link" data-toggle="pill" href="#polyline" role="tab" aria-controls="polyline" aria-selected="false">Polyline</a>
       <a class="nav-link" data-toggle="pill" href="#polygon" role="tab" aria-controls="polygon" aria-selected="false">Polygon</a>
+      <a class="nav-link" data-toggle="pill" href="#image" role="tab" aria-controls="image" aria-selected="false">Image</a>
       <a class="nav-link" data-toggle="pill" href="#troubleshooting" role="tab" aria-controls="troubleshooting" aria-selected="false">Troubleshooting</a>
       <a class="nav-link" data-toggle="pill" href="#license" role="tab" aria-controls="license" aria-selected="false">License</a>
     </div>
@@ -229,7 +230,7 @@
             </tr>
             <tr>
               <td><b>9</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -237,7 +238,7 @@
             </tr>
             <tr>
               <td><b>10</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>
@@ -328,7 +329,7 @@
             </tr>
             <tr>
               <td><b>8</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -336,7 +337,7 @@
             </tr>
             <tr>
               <td><b>9</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>
@@ -419,7 +420,7 @@
             </tr>
             <tr>
               <td><b>7</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -427,7 +428,7 @@
             </tr>
             <tr>
               <td><b>8</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>
@@ -518,7 +519,7 @@
             </tr>
             <tr>
               <td><b>8</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -526,7 +527,7 @@
             </tr>
             <tr>
               <td><b>9</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>
@@ -609,7 +610,7 @@
             </tr>
             <tr>
               <td><b>7</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -617,7 +618,7 @@
             </tr>
             <tr>
               <td><b>8</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>
@@ -700,7 +701,7 @@
             </tr>
             <tr>
               <td><b>7</b></td>
-              <td>mouseOverElement</td>
+              <td>mouseOverEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved over the element.</td>
               <td><b>NO</b></td>
@@ -708,7 +709,107 @@
             </tr>
             <tr>
               <td><b>8</b></td>
-              <td>mouseOutElement</td>
+              <td>MouseOutEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Image tab -->
+      <div class="tab-pane fade" id="image" role="tabpanel">
+        <h2>Image</h2>
+        <p>
+          To add a image element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-image&gt; &lt;/svg-image&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the image.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>imageUrl</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Path to the image for SVG image.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>x</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>y</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>height</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Height of the image.</td>
+              <td><b>NO</b></td>
+              <td><code>100</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>width</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Width of the image.</td>
+              <td><b>NO</b></td>
+              <td><code>100</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>mouseOverEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>MouseOutEvent</td>
               <td>Output parameter <code>(MouseEvent)</code></td>
               <td>Is fired when mouse is moved out of the element.</td>
               <td><b>NO</b></td>

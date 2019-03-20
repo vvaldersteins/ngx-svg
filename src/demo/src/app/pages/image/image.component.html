@@ -1,0 +1,76 @@
+<!-- Header of the image -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Image</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with images -->
+      <svg-container containerId="image" [height]="getHeight()">
+        <svg-image [imageUrl]="image.imageUrl" [height]="image.height" [width]="image.width"
+          [x]="image.x" [y]="image.y" *ngFor="let image of images"></svg-image>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg Image configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image URL</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>Width</th>
+              <th>Height</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="images.length > 0">
+              <tr *ngFor="let image of images; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="image.imageUrl" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="image.x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="image.y" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="image.width" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="image.height" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="images.length === 0">
+              <td colspan="7" class="text-center">
+                There are no images
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New image</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

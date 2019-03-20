@@ -18,6 +18,7 @@ import { SvgEllipseDirective } from './directives/svg-ellipse.directive';
 import { SvgLineDirective } from './directives/svg-line.directive';
 import { SvgPolylineDirective } from './directives/svg-polyline.directive';
 import { SvgPolygonDirective } from './directives/svg-polygon.directive';
+import { SvgImageDirective } from './directives/svg-image.directive';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { SvgPolygonDirective } from './directives/svg-polygon.directive';
     SvgEllipseDirective,
     SvgLineDirective,
     SvgPolylineDirective,
-    SvgPolygonDirective
+    SvgPolygonDirective,
+    SvgImageDirective
   ],
   declarations: [
     SvgContainerComponent,
@@ -39,7 +41,8 @@ import { SvgPolygonDirective } from './directives/svg-polygon.directive';
     SvgEllipseDirective,
     SvgLineDirective,
     SvgPolylineDirective,
-    SvgPolygonDirective
+    SvgPolygonDirective,
+    SvgImageDirective
   ],
   providers: [],
 })

@@ -184,6 +184,24 @@ You can provide following parameters for the element
   fill: Background color of the polygon. (OPTIONAL, Defaults to '#000')
 ```
 
+## Image
+
+To add a image element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-image></svg-image> 
+```
+
+You can provide following parameters for the element
+
+```
+  imageUrl: Path to the image for SVG image. (MANDATORY)
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  height: Height of the image. (OPTIONAL, Defaults to 100)
+  width: Width of the image. (OPTIONAL, Defaults to 100)
+```
+
 ## Events
 
 Each of the above elements has a list of events that are available to be attached.
@@ -191,8 +209,8 @@ Each of the above elements has a list of events that are available to be attache
 ```
   clickEvent: Is fired when click event happens on the element.
   doubleClickEvent: Is fired when double click event happens on the element.
-  mouseOverElement: Is fired when mouse is moved over the element.
-  mouseOutElement: Is fired when mouse is moved out of the element.
+  mouseOverEvent: Is fired when mouse is moved over the element.
+  mouseOutEvent: Is fired when mouse is moved out of the element.
 ```
 
 Each of the events returns an instance of `MouseEvent`.

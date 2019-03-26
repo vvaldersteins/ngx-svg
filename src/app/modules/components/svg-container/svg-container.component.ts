@@ -23,6 +23,7 @@ export class SvgContainerComponent implements AfterViewInit {
   public pointYCoordinate: number;
   public mouseInContainer = false;
   private _triggerCoordinateChange = false;
+  private singleClickHappened: boolean;
 
   /**
    * Input variables used within the component.
@@ -36,7 +37,10 @@ export class SvgContainerComponent implements AfterViewInit {
   /**
    * Output variables used within the component.
    */
-  @Output() clickEvent: EventEmitter<{ x: number, y: number }> = new EventEmitter(); // Event handler for retrieving coordinates at clicked position
+  @Output() clickEvent: EventEmitter<{ x: number, y: number }>
+    = new EventEmitter(); // Event handler for retrieving coordinates at clicked position
+  @Output() doubleClickEvent: EventEmitter<{ x: number, y: number }>
+    = new EventEmitter(); // Event handler for retrieving coordinates at position where you double-click.
 
   /**
    * Create SVG Container component instance.
@@ -74,7 +78,30 @@ export class SvgContainerComponent implements AfterViewInit {
    * Does all required pre-requisites when hovered point is clicked.
    */
   onPointClick() {
-    this.clickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
+    // Indicate that single click has happened.
+    this.singleClickHappened = true;
+
+    // Assign coordinates
+    const x = this.pointXCoordinate + this.pointSize / 2;
+    const y = this.pointYCoordinate + this.pointSize / 2;
+
+    // Set timeout, to make sure we cancel it if double-click happens.
+    setTimeout(() => {
+      if (this.singleClickHappened) {
+        this.clickEvent.emit({ x, y });
+      }
+    }, 250);
+  }
+
+  /**
+   * Does all required pre-requisites when hovered point is double clicked.
+   */
+  onPointDoubleClick() {
+    // Now let's fire double click event
+    this.doubleClickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
+
+    // First let's set that double click has happened
+    this.singleClickHappened = false;
   }
 
   /**

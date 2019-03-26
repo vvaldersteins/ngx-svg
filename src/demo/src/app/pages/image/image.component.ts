@@ -19,7 +19,7 @@ export class ImageComponent {
    * Globally used variables within the component.
    */
   private images: Image[] = [{
-    imageUrl: 'assets/dog.png',
+    imageUrl: 'ngx-svg/assets/dog.png',
     x: 100,
     y: 100,
     width: 100,
@@ -40,7 +40,7 @@ export class ImageComponent {
    */
   addNew() {
     this.images.push({
-      imageUrl: 'assets/dog.png',
+      imageUrl: 'ngx-svg/assets/dog.png',
       x: 0,
       y: 0,
       width: 100,

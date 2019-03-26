@@ -1,6 +1,6 @@
 {
   "name": "ngx-svg",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Angular Library for creating SVG elements.",
   "license": "MIT",
   "scripts": {

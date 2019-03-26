@@ -85,8 +85,6 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
    * @param reloadImage - Boolean indicator if image should be reloaded.
    */
   updateImage(reloadImage: boolean) {
-    console.log('called');
-
     // Check if we have to update only image properties, or also image itself
     if (reloadImage) {
       this._image

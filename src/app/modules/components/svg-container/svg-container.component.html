@@ -1,6 +1,6 @@
 <div [id]="containerId" class="svg-container" [style.height.px]="height" [class.svg-grid]="showGrid" (mousemove)="mouseInContainer = true"
   (mousemove)="adjustPointPosition($event)" (mouseenter)="mouseInContainer = true" (mouseleave)="mouseInContainer = false">
-  <div class="svg-hover-point" (click)="onPointClick()" (mousemove)="onPointHover()" [style.width.px]="pointSize" [style.height.px]="pointSize"
+  <div class="svg-hover-point" (dblclick)="onPointDoubleClick()" (click)="onPointClick()" (mousemove)="onPointHover()" [style.width.px]="pointSize" [style.height.px]="pointSize"
     *ngIf="hoverable && mouseInContainer" [style.left.px]="pointXCoordinate" [style.top.px]="pointYCoordinate"></div>
   <ng-content></ng-content>
 </div>

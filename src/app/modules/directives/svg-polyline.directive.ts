@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -27,8 +27,9 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
    */
   @Input() points: SVG.PointArrayAlias; // Array with points in format [[x, y], [x1, y1], [x2, y2], ..., [xn, yn]].
   @Input() borderSize: number; // Size of the border.
-  @Input() borderColor = '#000'; // Color of the line.
+  @Input() borderColor = '#000'; // Color of the polyline.
   @Input() fill = '#000'; // Color of the polyline body
+  @Input() classes: string[] = []; // List of CSS classes which needs to be added.
 
   /**
    * Output variables for the polyline directive.
@@ -58,11 +59,28 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
 
   /**
    * Is called when changes are made to the polyline object.
+   * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     if (this._polyline) {
       // If we have already created the object, update it.
       this.updatePolyline();
+
+      // Check if classes were changed
+      if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
+        // Get classes that needs to be removed
+        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
+          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Get classes that needs to be added
+        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
+          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Add and remove classes
+        this.addRemoveClasses(classesToAdd, classesToRemove);
+      }
     }
   }
 
@@ -88,6 +106,28 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+
+      // Add classes to the polyline
+      this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Adds classes to the polyline object.
+   * @param classesToAdd - List of classes, which needs to be added.
+   * @param classesToRemove - List of classes, which needs to be removed.
+   */
+  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+    // First let's remove classes, that are not necessary anymore
+    for (const classToRemove of classesToRemove) {
+      this._polyline
+        .removeClass(classToRemove);
+    }
+
+    // Now let's add new classes
+    for (const classToAdd of classesToAdd) {
+      this._polyline
+        .addClass(classToAdd);
+    }
   }
 
   /**

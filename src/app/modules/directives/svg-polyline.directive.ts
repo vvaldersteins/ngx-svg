@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -16,7 +16,7 @@ import { SvgContainerComponent } from '../components/svg-container/svg-container
 @Directive({
   selector: 'svg-polyline'
 })
-export class SvgPolylineDirective implements AfterViewChecked, OnDestroy {
+export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDestroy {
   /**
    * Globally used variables within the directive.
    */
@@ -53,7 +53,14 @@ export class SvgPolylineDirective implements AfterViewChecked, OnDestroy {
     // Check if container is creatted and no polyline object is created
     if (this._svgContainer.getContainer() && !this._polyline) {
       this.createPolyline();
-    } else if (this._polyline) {
+    }
+  }
+
+  /**
+   * Is called when changes are made to the polyline object.
+   */
+  ngOnChanges() {
+    if (this._polyline) {
       // If we have already created the object, update it.
       this.updatePolyline();
     }

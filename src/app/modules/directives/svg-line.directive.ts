@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -16,7 +16,7 @@ import { SvgContainerComponent } from '../components/svg-container/svg-container
 @Directive({
   selector: 'svg-line'
 })
-export class SvgLineDirective implements AfterViewChecked, OnDestroy {
+export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy {
   /**
    * Globally used variables within the directive.
    */
@@ -54,7 +54,14 @@ export class SvgLineDirective implements AfterViewChecked, OnDestroy {
     // Check if container is creatted and no line object is created
     if (this._svgContainer.getContainer() && !this._line) {
       this.createLine();
-    } else if (this._line) {
+    }
+  }
+
+  /**
+   * Is called when changes are made to the line object.
+   */
+  ngOnChanges() {
+    if (this._line) {
       // If we have already created the object, update it.
       this.updateLine();
     }

@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -16,7 +16,7 @@ import { SvgContainerComponent } from '../components/svg-container/svg-container
 @Directive({
   selector: 'svg-rect'
 })
-export class SvgRectDirective implements AfterViewChecked, OnDestroy {
+export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy {
   /**
    * Globally used variables within the directive.
    */
@@ -54,7 +54,14 @@ export class SvgRectDirective implements AfterViewChecked, OnDestroy {
     // Check if container is creatted and no rectangular object is created
     if (this._svgContainer.getContainer() && !this._rect) {
       this.createRect();
-    } else if (this._rect) {
+    }
+  }
+
+  /**
+   * Is called when changes are made to the rect object.
+   */
+  ngOnChanges() {
+    if (this._rect) {
       // If we have already created the object, update it.
       this.updateRect();
     }

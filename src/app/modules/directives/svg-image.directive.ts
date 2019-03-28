@@ -48,7 +48,17 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   ) { }
 
   /**
-   * Is called when changes are made to the object.
+   * Creates the image object within the container.
+   */
+  ngAfterViewChecked() {
+    // Check if container is creatted and no image object is created
+    if (this._svgContainer.getContainer() && !this._image) {
+      this.createImage();
+    }
+  }
+
+  /**
+   * Is called when changes are made to the image object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
   ngOnChanges(changes: SimpleChanges) {
@@ -67,16 +77,6 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
         // Update only image properties
         this.updateImage(false);
       }
-    }
-  }
-
-  /**
-   * Creates or updates the image object within the container.
-   */
-  ngAfterViewChecked() {
-    // Check if container is creatted and no image object is created
-    if (this._svgContainer.getContainer() && !this._image) {
-      this.createImage();
     }
   }
 

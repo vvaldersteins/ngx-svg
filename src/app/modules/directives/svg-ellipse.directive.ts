@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -16,7 +16,7 @@ import { SvgContainerComponent } from '../components/svg-container/svg-container
 @Directive({
   selector: 'svg-ellipse'
 })
-export class SvgEllipseDirective implements AfterViewChecked, OnDestroy {
+export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestroy {
   /**
    * Globally used variables within the directive.
    */
@@ -53,7 +53,14 @@ export class SvgEllipseDirective implements AfterViewChecked, OnDestroy {
     // Check if container is creatted and no ellipse object is created
     if (this._svgContainer.getContainer() && !this._ellipse) {
       this.createEllipse();
-    } else if (this._ellipse) {
+    }
+  }
+
+  /**
+   * Is called when changes are made to the ellipse object.
+   */
+  ngOnChanges() {
+    if (this._ellipse) {
       // If we have already created the object, update it.
       this.updateEllipse();
     }

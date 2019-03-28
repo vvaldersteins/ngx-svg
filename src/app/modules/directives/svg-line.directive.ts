@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -31,6 +31,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Input() y0 = 0; // Starting point on y axis.
   @Input() x1 = 1; // Ending point on x axis.
   @Input() y1 = 1; // Ending point on y axis.
+  @Input() classes: string[] = []; // List of CSS classes which needs to be added.
   /**
    * Output variables for the line directive.
    */
@@ -59,11 +60,28 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
 
   /**
    * Is called when changes are made to the line object.
+   * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     if (this._line) {
       // If we have already created the object, update it.
       this.updateLine();
+
+      // Check if classes were changed
+      if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
+        // Get classes that needs to be removed
+        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
+          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Get classes that needs to be added
+        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
+          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Add and remove classes
+        this.addRemoveClasses(classesToAdd, classesToRemove);
+      }
     }
   }
 
@@ -87,6 +105,28 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+
+      // Add classes to the line
+      this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Adds classes to the line object.
+   * @param classesToAdd - List of classes, which needs to be added.
+   * @param classesToRemove - List of classes, which needs to be removed.
+   */
+  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+    // First let's remove classes, that are not necessary anymore
+    for (const classToRemove of classesToRemove) {
+      this._line
+        .removeClass(classToRemove);
+    }
+
+    // Now let's add new classes
+    for (const classToAdd of classesToAdd) {
+      this._line
+        .addClass(classToAdd);
+    }
   }
 
   /**

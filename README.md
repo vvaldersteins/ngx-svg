@@ -96,6 +96,7 @@ You can provide following parameters for the element
   y0: Starting point on y axis. (OPTIONAL, Defaults to 0)
   x1: Ending point on x axis. (OPTIONAL, Defaults to 1)
   y1: Ending point on y axis (OPTIONAL, Defaults to 1)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Rectangular
@@ -114,6 +115,7 @@ You can provide following parameters for the element
   color: Background color of the rectangular. (OPTIONAL, Defaults to '#000')
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Circle
@@ -131,6 +133,7 @@ You can provide following parameters for the element
   color: Background color of the circle. (OPTIONAL, Defaults to '#000')
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Ellipse
@@ -149,6 +152,7 @@ You can provide following parameters for the element
   color: Background color of the ellipse. (OPTIONAL, Defaults to '#000')
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Polyline
@@ -166,6 +170,7 @@ You can provide following parameters for the element
   borderSize: Size of the border for the polyline. (MANDATORY)
   borderColor: Border color of the polyline. (OPTIONAL, Defaults to '#000')
   fill: Background color of the polyline. (OPTIONAL, Defaults to '#000')
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Polygon
@@ -183,6 +188,7 @@ You can provide following parameters for the element
   borderSize: Size of the border for the polygon. (MANDATORY)
   borderColor: Border color of the polygon. (OPTIONAL, Defaults to '#000')
   fill: Background color of the polygon. (OPTIONAL, Defaults to '#000')
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Image
@@ -201,6 +207,7 @@ You can provide following parameters for the element
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
   height: Height of the image. (OPTIONAL, Defaults to 100)
   width: Width of the image. (OPTIONAL, Defaults to 100)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
 ## Events

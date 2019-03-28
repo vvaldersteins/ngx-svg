@@ -30,6 +30,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   @Input() y = 0; // Starting point on y axis.
   @Input() height = 100; // Height of the image.
   @Input() width = 100; // Width of the image.
+  @Input() classes: string[] = []; // List of CSS classes which needs to be added.
 
   /**
    * Output variables for the image directive.
@@ -77,6 +78,22 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
         // Update only image properties
         this.updateImage(false);
       }
+
+      // Check if classes were changed
+      if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
+        // Get classes that needs to be removed
+        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
+          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Get classes that needs to be added
+        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
+          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        );
+
+        // Add and remove classes
+        this.addRemoveClasses(classesToAdd, classesToRemove);
+      }
     }
   }
 
@@ -111,6 +128,28 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+
+      // Add classes to the image
+      this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Adds classes to the image object.
+   * @param classesToAdd - List of classes, which needs to be added.
+   * @param classesToRemove - List of classes, which needs to be removed.
+   */
+  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+    // First let's remove classes, that are not necessary anymore
+    for (const classToRemove of classesToRemove) {
+      this._image
+        .removeClass(classToRemove);
+    }
+
+    // Now let's add new classes
+    for (const classToAdd of classesToAdd) {
+      this._image
+        .addClass(classToAdd);
+    }
   }
 
   /**

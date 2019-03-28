@@ -59,6 +59,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
 
   /**
    * Is called when changes are made to the circle object.
+   * @param changes - Angular Simple Changes object containing all of the changes.
    */
   ngOnChanges(changes: SimpleChanges) {
     if (this._circle) {
@@ -108,7 +109,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-    // Add to the circle
+    // Add classes to the circle
     this.addRemoveClasses(this.classes);
   }
 

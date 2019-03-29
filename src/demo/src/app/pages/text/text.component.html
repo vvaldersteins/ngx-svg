@@ -1,0 +1,76 @@
+<!-- Header of the text -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Text</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with texts -->
+      <svg-container containerId="text" [height]="getHeight()">
+        <svg-text [size]="text.size" [text]="text.text" [color]="text.color"
+          [x]="text.x" [y]="text.y" *ngFor="let text of texts"></svg-text>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg Text configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Text</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="texts.length > 0">
+              <tr *ngFor="let text of texts; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="text.text" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="text.color" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="text.size" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="text.x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="text.y" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="texts.length === 0">
+              <td colspan="7" class="text-center">
+                There are no texts
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New Text</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

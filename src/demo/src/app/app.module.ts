@@ -28,6 +28,7 @@ import { EllipseComponent } from './pages/ellipse/ellipse.component';
 import { PolylineComponent } from './pages/polyline/polyline.component';
 import { PolygonComponent } from './pages/polygon/polygon.component';
 import { ImageComponent } from './pages/image/image.component';
+import { TextComponent } from './pages/text/text.component';
 
 /**
  * Define page routes.
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'polyline', component: PolylineComponent },
   { path: 'polygon', component: PolygonComponent },
   { path: 'image', component: ImageComponent },
+  { path: 'text', component: TextComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home' }
 ];
 
@@ -55,7 +57,8 @@ const routes: Routes = [
     EllipseComponent,
     PolylineComponent,
     PolygonComponent,
-    ImageComponent
+    ImageComponent,
+    TextComponent
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,7 @@ import { SvgLineDirective } from './directives/svg-line.directive';
 import { SvgPolylineDirective } from './directives/svg-polyline.directive';
 import { SvgPolygonDirective } from './directives/svg-polygon.directive';
 import { SvgImageDirective } from './directives/svg-image.directive';
+import { SvgTextDirective } from './directives/svg-text.directive';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { SvgImageDirective } from './directives/svg-image.directive';
     SvgLineDirective,
     SvgPolylineDirective,
     SvgPolygonDirective,
-    SvgImageDirective
+    SvgImageDirective,
+    SvgTextDirective
   ],
   declarations: [
     SvgContainerComponent,
@@ -42,7 +44,8 @@ import { SvgImageDirective } from './directives/svg-image.directive';
     SvgLineDirective,
     SvgPolylineDirective,
     SvgPolygonDirective,
-    SvgImageDirective
+    SvgImageDirective,
+    SvgTextDirective
   ],
   providers: [],
 })

@@ -193,7 +193,7 @@ You can provide following parameters for the element
 
 ## Image
 
-To add a image element to the svg-container, you must add the following element inside `svg-container` -
+To add an image element to the svg-container, you must add the following element inside `svg-container` -
 
 ```
   <svg-image></svg-image> 
@@ -207,6 +207,25 @@ You can provide following parameters for the element
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
   height: Height of the image. (OPTIONAL, Defaults to 100)
   width: Width of the image. (OPTIONAL, Defaults to 100)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
+```
+
+## Text
+
+To add a text element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-text></svg-text> 
+```
+
+You can provide following parameters for the element
+
+```
+  text: Text that will be set for the element. (MANDATORY)
+  color: Color of the text. (OPTIONAL, Defaults to '#000')
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  size: Size of the text. (OPTIONAL, Defaults to 10)
   classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 

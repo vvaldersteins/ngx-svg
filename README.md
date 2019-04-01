@@ -211,6 +211,27 @@ You can provide following parameters for the element
   classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 
+## Path
+
+To add a path element to the svg-container, you must add the following element inside `svg-container` -
+
+```
+  <svg-path></svg-path> 
+```
+
+You can provide following parameters for the element
+
+```
+  path: A valid path which will be displayed. (MANDATORY)
+  borderColor: Border color which will be used for the path. (OPTIONAL, Defaults to '#000')
+  borderSize: Border size which will be used for the path. (OPTIONAL, Defaults to 2)
+  x: Starting point on x axis. (OPTIONAL, Defaults to 0)
+  y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
+```
+
+Path uses complex data in string format to create the SVG. For more information, you can take a look at <a href="https://www.w3.org/TR/SVG/paths.html#PathData" target="_blank">official SVG Path documentation</a>.
+
 ## Text
 
 To add a text element to the svg-container, you must add the following element inside `svg-container` -

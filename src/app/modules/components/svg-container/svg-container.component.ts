@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -14,7 +14,7 @@ const svgFunc = SVG;
   templateUrl: 'svg-container.component.html',
   styleUrls: ['./svg-container.component.css']
 })
-export class SvgContainerComponent implements AfterViewInit {
+export class SvgContainerComponent implements AfterViewInit, OnChanges {
   /**
    * Globally used variables within the component.
    */
@@ -33,6 +33,7 @@ export class SvgContainerComponent implements AfterViewInit {
   @Input() showGrid = false; // Indicator if grid image should be shown in the background of svg container.
   @Input() hoverable = false; // Indicator if user should be able to see dot on hover, to capture coordinates.
   @Input() pointSize = 10; // Numeric value in pixels, to indicate how large should the point be.
+  @Input() viewBox: number[] = []; // Viewbox of the container, must be an array consisting of 4 integers [x, y, width, height].
 
   /**
    * Output variables used within the component.
@@ -46,6 +47,30 @@ export class SvgContainerComponent implements AfterViewInit {
    * Create SVG Container component instance.
    */
   constructor() { }
+
+  /**
+   * Does all required pre-requisites when input variables changes.
+   * @param changes - Changes object containing input variable changes for the container.
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    // Check if svg container is defined
+    if (this._svg) {
+      // Check if viewbox has changed
+      if (changes.viewBox && changes.viewBox.currentValue !== changes.viewBox.previousValue) {
+        // Check if we are still using viewbox
+        if (changes.viewBox.currentValue.length === 4) {
+          // Get viewbox value
+          const viewbox = changes.viewBox.currentValue;
+
+          // Set viewbox
+          this._svg.viewbox(viewbox[0], viewbox[1], viewbox[2], viewbox[3]);
+        } else {
+          // Remove viewbox
+          this._svg.viewbox();
+        }
+      }
+    }
+  }
 
   /**
    * Does all required pre-requisites before initializing the component.
@@ -116,7 +141,13 @@ export class SvgContainerComponent implements AfterViewInit {
    * @param id - ID of the container.
    */
   setContainer(id: string) {
-    this._svg = svgFunc(id);
+    // Assign viewbox only if it's defined
+    if (this.viewBox && this.viewBox.length === 4) {
+      this._svg = svgFunc(id)
+        .viewbox(this.viewBox[0], this.viewBox[1], this.viewBox[2], this.viewBox[3]);
+    } else {
+      this._svg = svgFunc(id);
+    }
   }
 
   /**

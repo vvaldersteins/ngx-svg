@@ -1,0 +1,80 @@
+<!-- Header of the path -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Path</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with paths -->
+      <svg-container containerId="path" [height]="getHeight()">
+        <svg-path [borderSize]="path.borderSize" [borderColor]="path.borderColor" [fill]="path.fill"
+          [x]="path.x" [y]="path.y" [path]="path.path" *ngFor="let path of paths"></svg-path>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg patb configuration -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Path</th>
+              <th>Border Size</th>
+              <th>Border Color</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>Fill</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="paths.length > 0">
+              <tr *ngFor="let path of paths; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="path.path" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="path.borderSize" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="path.borderColor" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="path.x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="path.y" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="path.fill" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="paths.length === 0">
+              <td colspan="8" class="text-center">
+                There are no paths
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New path</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Component, AfterViewInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -45,8 +45,11 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
   /**
    * Create SVG Container component instance.
+   * @param cdRef - Change Detector Ref object instance.
    */
-  constructor() { }
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) { }
 
   /**
    * Does all required pre-requisites when input variables changes.
@@ -68,6 +71,16 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
           // Remove viewbox
           this._svg.viewbox();
         }
+      }
+
+      // Check if any other input variables have changed
+      if (
+        changes.height && changes.height.currentValue !== changes.height.previousValue ||
+        changes.showGrid && changes.showGrid.currentValue !== changes.showGrid.previousValue ||
+        changes.hoverable && changes.hoverable.currentValue !== changes.hoverable.previousValue ||
+        changes.pointSize && changes.pointSize.currentValue !== changes.pointSize.previousValue
+      ) {
+        this.cdRef.detectChanges();
       }
     }
   }

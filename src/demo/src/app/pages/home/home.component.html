@@ -20,6 +20,7 @@
       <a class="nav-link" data-toggle="pill" href="#polyline" role="tab" aria-controls="polyline" aria-selected="false">Polyline</a>
       <a class="nav-link" data-toggle="pill" href="#polygon" role="tab" aria-controls="polygon" aria-selected="false">Polygon</a>
       <a class="nav-link" data-toggle="pill" href="#image" role="tab" aria-controls="image" aria-selected="false">Image</a>
+      <a class="nav-link" data-toggle="pill" href="#path" role="tab" aria-controls="path" aria-selected="false">Path</a>
       <a class="nav-link" data-toggle="pill" href="#text" role="tab" aria-controls="text" aria-selected="false">Text</a>
       <a class="nav-link" data-toggle="pill" href="#troubleshooting" role="tab" aria-controls="troubleshooting" aria-selected="false">Troubleshooting</a>
       <a class="nav-link" data-toggle="pill" href="#license" role="tab" aria-controls="license" aria-selected="false">License</a>
@@ -890,6 +891,123 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Path tab -->
+      <div class="tab-pane fade" id="path" role="tabpanel">
+        <h2>Path</h2>
+        <p>
+          To add a path element to the svg-container, you must add the following element inside the <code>svg-container</code> component tag -
+        </p>
+        <code>
+          &lt;svg-path&gt; &lt;/svg-path&gt;
+        </code>
+        <p></p>
+        <p>In the below table you can see explanation of the input and output parameters for the path.</p>
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Explanation</th>
+              <th>Mandatory</th>
+              <th>Default value</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>path</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>A valid path which will be displayed.</td>
+              <td><b>YES</b></td>
+              <td><code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>borderColor</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Border color which will be used for the path.</td>
+              <td><b>NO</b></td>
+              <td><code>'#000'</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>borderSize</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Border size which will be used for the path.</td>
+              <td><b>NO</b></td>
+              <td><code>2</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>x</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on x axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>y</td>
+              <td>Input parameter <code>(number)</code></td>
+              <td>Starting point on y axis.</td>
+              <td><b>NO</b></td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>fill</td>
+              <td>Input parameter <code>(string)</code></td>
+              <td>Fill color of the path.</td>
+              <td><b>NO</b></td>
+              <td><code>''</code></td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>classes</td>
+              <td>Input parameter <code>(array of strings)</code></td>
+              <td>List of CSS classes which will be added.</td>
+              <td><b>NO</b></td>
+              <td><code>[]</code></td>
+            </tr>
+            <tr>
+              <td><b>8</b></td>
+              <td>clickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>9</b></td>
+              <td>doubleClickEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when double click event happens on the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>10</b></td>
+              <td>mouseOverEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved over the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+            <tr>
+              <td><b>11</b></td>
+              <td>MouseOutEvent</td>
+              <td>Output parameter <code>(MouseEvent)</code></td>
+              <td>Is fired when mouse is moved out of the element.</td>
+              <td><b>NO</b></td>
+              <td><code>N/A</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Path uses complex data in string format to create the SVG. For more information, you can take a look at <a href="https://www.w3.org/TR/SVG/paths.html#PathData" target="_blank">official SVG Path documentation</a>.</p>
       </div>
 
       <!-- Text tab -->

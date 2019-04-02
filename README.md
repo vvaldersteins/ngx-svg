@@ -227,6 +227,7 @@ You can provide following parameters for the element
   borderSize: Border size which will be used for the path. (OPTIONAL, Defaults to 2)
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  fill: Fill color of the path. (OPTIONAL, Defaults to '')
   classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 

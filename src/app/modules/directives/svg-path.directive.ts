@@ -30,6 +30,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Input() borderSize = 2; // Size of the border.
   @Input() x = 0; // Starting point on x axis.
   @Input() y = 0; // Starting point on y axis.
+  @Input() fill = ''; // Fill color of the path.
   @Input() classes: string[] = []; // List of CSS classes which needs to be added.
 
   /**
@@ -91,7 +92,8 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   updatePath() {
     this._path
       .plot(this.path) // Update the path for the element
-      .stroke({ color: this.borderColor, width: this.borderSize }) // Update the border for the path
+      .stroke({ color: this.borderColor, width: this.borderSize }) // Update the border for the
+      .fill(this.fill === '' ? 'rgba(0, 0, 0, 0)' : this.fill) // Update fill of the path
       .move(this.x, this.y); // Update the location of the path
   }
 
@@ -102,6 +104,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
     this._path = this._svgContainer.getContainer()
       .path(this.path) // Set the path for the element
       .stroke({ color: this.borderColor, width: this.borderSize }) // Set the border for the path
+      .fill(this.fill === '' ? 'rgba(0, 0, 0, 0)' : this.fill) // Set fill of the path
       .move(this.x, this.y) // Set the location of the path
       .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event

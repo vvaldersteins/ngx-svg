@@ -42,6 +42,10 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
     = new EventEmitter(); // Event handler for retrieving coordinates at clicked position
   @Output() doubleClickEvent: EventEmitter<{ x: number, y: number }>
     = new EventEmitter(); // Event handler for retrieving coordinates at position where you double-click.
+  @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter(); // Event handler when mouse is moved over the container.
+  @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter(); // Event handler when the mouse exits the container.
+  @Output() mouseMoveEvent: EventEmitter<{ x: number, y: number }> = new EventEmitter();
+    // Event handler when the mouse is being moved on the container.
 
   /**
    * Create SVG Container component instance.
@@ -113,6 +117,24 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   }
 
   /**
+   * Adjust the mouse move position, and sends out to the user.
+   * @param event - Mouse event handler from the DOM.
+   */
+  adjustMouseMovePosition(event: MouseEvent) {
+    if ((this.hoverable && this._triggerCoordinateChange)) {
+      this.mouseMoveEvent.emit({
+        x: this.pointXCoordinate + this.pointSize / 2,
+        y: this.pointYCoordinate + this.pointSize / 2
+      });
+    } else if (!this.hoverable) {
+      this.mouseMoveEvent.emit({
+        x: event.layerX,
+        y: event.layerY
+      });
+    }
+  }
+
+  /**
    * Does all required pre-requisites when hovered point is clicked.
    */
   onPointClick() {
@@ -135,10 +157,10 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    * Does all required pre-requisites when hovered point is double clicked.
    */
   onPointDoubleClick() {
-    // Now let's fire double click event
+    // Let's fire double click event
     this.doubleClickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
 
-    // First let's set that double click has happened
+    // Let's set that double click has happened
     this.singleClickHappened = false;
   }
 

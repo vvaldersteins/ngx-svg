@@ -74,6 +74,9 @@ pointSize: Numeric value in pixels, to indicate how large should the point be. (
 viewBox: Viewbox of the container, must be an array consisting of 4 integers [x, y, width, height]. (OPTIONAL, Defaults to [])
 clickEvent: Is fired when click event happens on the hovered point element. Must have hoverable option enabled. (OUTPUT PARAMETER)
 doubleClickEvent: Is fired when double click event happens on the hovered point element. Must have hoverable option enabled.  (OUTPUT PARAMETER)
+mouseOverEvent: Is fired when mouse is moved over the container. (OUTPUT PARAMETER)
+mouseOutEvent: Is fired when mouse exits the container area. (OUTPUT PARAMETER)
+mouseMoveEvent: Is fired when mouse moves within the container area. (OUTPUT PARAMETER)
 ```
 
 # Elements

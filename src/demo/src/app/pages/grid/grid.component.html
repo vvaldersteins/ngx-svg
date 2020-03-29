@@ -1,0 +1,33 @@
+<!-- Header of the grid -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Grid</h1>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <!-- Svg Container with grid -->
+      <svg-container containerId="grid" [showGrid]="showGrid" [grid]="grid">
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <!-- Svg grid configuration section -->
+      <label>Display grid</label>
+      <input type="checkbox" [(ngModel)]="showGrid" class="form-control" />
+
+      <label>Grid box width</label>
+      <input type="number" [(ngModel)]="grid.width" (change)="updateGrid()" class="form-control" />
+
+      <label>Grid box height</label>
+      <input type="number" [(ngModel)]="grid.height" (change)="updateGrid()" class="form-control" />
+
+      <label>Grid box stroke color</label>
+      <input type="string" [(ngModel)]="grid.strokeColor" (change)="updateGrid()" class="form-control" />
+
+      <button class="btn btn-primary mt-3" (click)="updateGrid()">Update Grid</button>
+    </div>
+  </div>
+</div>

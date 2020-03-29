@@ -6,7 +6,7 @@ import { Component, AfterViewInit, Input, Output, EventEmitter, OnChanges, Simpl
 /**
  * Import third-party libraries.
  */
-import { SVG, Container } from '@svgdotjs/svg.js';
+import { SVG, Container, Pattern, Rect } from '@svgdotjs/svg.js';
 
 @Component({
   selector: 'svg-container',
@@ -18,11 +18,12 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    * Globally used variables within the component.
    */
   private _svg: Container;
+  private _grid: Rect;
+  private _triggerCoordinateChange = false;
+  private _singleClickHappened: boolean;
   public pointXCoordinate: number;
   public pointYCoordinate: number;
   public mouseInContainer = false;
-  private _triggerCoordinateChange = false;
-  private singleClickHappened: boolean;
 
   /**
    * Input variables used within the component.
@@ -30,6 +31,15 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   @Input() containerId: string; // Container id which will be used to create the container.
   @Input() height = 200; // Height of the container.
   @Input() showGrid = false; // Indicator if grid image should be shown in the background of svg container.
+  @Input() grid: {
+    width: number;
+    height: number;
+    strokeColor: string;
+  } = {
+    width: 10,
+    height: 10,
+    strokeColor: 'black'
+  }; // Grid object based on which the grid for the svg will be constructed
   @Input() hoverable = false; // Indicator if user should be able to see dot on hover, to capture coordinates.
   @Input() pointSize = 10; // Numeric value in pixels, to indicate how large should the point be.
   @Input() viewBox: number[] = []; // Viewbox of the container, must be an array consisting of 4 integers [x, y, width, height].
@@ -81,9 +91,18 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
         this._svg.size('100%', changes.height.currentValue);
       }
 
+      // Let's update pattern in case grid was changed
+      if (changes.showGrid || changes.grid) {
+        // Update values
+        this.grid = changes.grid ? changes.grid.currentValue : this.grid;
+        this.showGrid = changes.showGrid ? changes.showGrid.currentValue : this.showGrid;
+
+        // Let's update the pattern
+        this.setGridPattern();
+      }
+
       // Check if any other input variables have changed
       if (
-        changes.showGrid && changes.showGrid.currentValue !== changes.showGrid.previousValue ||
         changes.hoverable && changes.hoverable.currentValue !== changes.hoverable.previousValue ||
         changes.pointSize && changes.pointSize.currentValue !== changes.pointSize.previousValue
       ) {
@@ -142,7 +161,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    */
   onPointClick() {
     // Indicate that single click has happened.
-    this.singleClickHappened = true;
+    this._singleClickHappened = true;
 
     // Assign coordinates
     const x = this.pointXCoordinate + this.pointSize / 2;
@@ -150,7 +169,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
     // Set timeout, to make sure we cancel it if double-click happens.
     setTimeout(() => {
-      if (this.singleClickHappened) {
+      if (this._singleClickHappened) {
         this.clickEvent.emit({ x, y });
       }
     }, 250);
@@ -164,7 +183,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
     this.doubleClickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
 
     // Let's set that double click has happened
-    this.singleClickHappened = false;
+    this._singleClickHappened = false;
   }
 
   /**
@@ -189,6 +208,40 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
       this._svg = SVG()
         .addTo(`#${id}`)
         .size('100%', this.height);
+    }
+
+    // Let's set pattern if grid and showGrid is set
+    if (this.showGrid) {
+      this.setGridPattern();
+    }
+  }
+
+  /**
+   * Does all required pre-requisites and initializes or updates grid pattern.
+   */
+  setGridPattern() {
+    // Let's create the pattern
+    const pattern = this._svg.pattern(this.grid.width, this.grid.height, (addedPattern: Pattern) => {
+      addedPattern.rect(this.grid.width, this.grid.height).fill('transparent').stroke(this.grid.strokeColor);
+    });
+
+    // Let's check if we have disabled the grid
+    if (!this.showGrid) {
+      // We have disabled the grid, let's hide grid if it exists
+      if (this._grid) {
+        this._grid.hide();
+      }
+    } else {
+      // Let's create grid, if we haven't created one yet.
+      if (!this._grid) {
+        this._grid = (this._svg.rect as any)('100%', '100%').fill(pattern);
+      } else {
+        // Let's show the grid
+        this._grid.show();
+
+        // Let's update grid fill with the new pattern
+        this._grid.fill(pattern);
+      }
     }
   }
 

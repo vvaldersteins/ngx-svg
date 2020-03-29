@@ -10,8 +10,9 @@
 3. [Container](#container)
 4. [Elements](#elements)
 5. [Demo](#demo)
-6. [Troubleshooting](#troubleshooting)
-7. [License](#license)
+6. [Custom CSS Classes](#custom-css-classes)
+7. [Troubleshooting](#troubleshooting)
+8. [License](#license)
 
 # Getting Started
 
@@ -68,7 +69,8 @@ Below are explanation of input and output parameters:
 ```
 containerId: Unique id for the svg container. Will be used for drawing the svg container. (MANDATORY)
 height: Height of the svg container. (OPTIONAL, Defaults to 200)
-showGrid: Indicator if grid image should be shown in the background of svg container. (OPTIONAL, Defaults to false)
+showGrid: Indicator if grid should be shown in the background of svg container. (OPTIONAL, Defaults to false)
+grid: Grid object that will be used to configure grid. (OPTIONAL, Defaults to { width: 10, height: 10, color: '#000' })
 hoverable: Indicator if user should be able to see dot on hover, to capture coordinates. (OPTIONAL, Defaults to false)
 pointSize: Numeric value in pixels, to indicate how large should the point be. (OPTIONAL, Defaults to 10)
 viewBox: Viewbox of the container, must be an array consisting of 4 integers [x, y, width, height]. (OPTIONAL, Defaults to [])
@@ -271,6 +273,14 @@ Each of the events returns an instance of `MouseEvent`.
 # Demo
 
 You can view demo via this [link](https://vvaldersteins.github.io/ngx-svg/), and browse the code [here](https://github.com/vvaldersteins/ngx-svg/tree/master/src/demo).
+
+# Custom CSS Classes
+
+If you are using custom css classes, make sure that you define them using `::ng-deep` combinator, otherwise ngx-svg components won't see the classes.
+
+To avoid leaking styles to other components, make sure to use `:host` combinator as well.
+
+You can find more information on the [official Angular documentation](https://angular.io/guide/component-styles).
 
 # Troubleshooting
 

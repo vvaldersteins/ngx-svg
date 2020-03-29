@@ -30,6 +30,7 @@ import { PolygonComponent } from './pages/polygon/polygon.component';
 import { ImageComponent } from './pages/image/image.component';
 import { PathComponent } from './pages/path/path.component';
 import { TextComponent } from './pages/text/text.component';
+import { GridComponent } from './pages/grid/grid.component';
 
 /**
  * Define page routes.
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'image', component: ImageComponent },
   { path: 'path', component: PathComponent },
   { path: 'text', component: TextComponent },
+  { path: 'grid', component: GridComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home' }
 ];
 
@@ -61,7 +63,8 @@ const routes: Routes = [
     PolygonComponent,
     ImageComponent,
     PathComponent,
-    TextComponent
+    TextComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,

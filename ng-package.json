@@ -4,5 +4,5 @@
     "entryFile": "ngx_svg.ts",
     "embedded": []
   },
-  "whitelistedNonPeerDependencies": ["svgjs", "rxjs-compat"]
+  "whitelistedNonPeerDependencies": ["@svdotjs/svg.js", "rxjs-compat"]
 }

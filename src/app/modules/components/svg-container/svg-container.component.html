@@ -1,4 +1,4 @@
-<div [id]="containerId" class="svg-container" [style.height.px]="height" [class.svg-grid]="showGrid" (mousemove)="mouseInContainer = true"
+<div [id]="containerId" class="svg-container" [class.svg-grid]="showGrid" (mousemove)="mouseInContainer = true"
   (mousemove)="adjustPointPosition($event); adjustMouseMovePosition($event);" (mouseenter)="mouseInContainer = true; mouseOverEvent.emit($event);"
   (mouseleave)="mouseInContainer = false; mouseOutEvent.emit($event);">
   <div class="svg-hover-point" (dblclick)="onPointDoubleClick()" (click)="onPointClick()" (mousemove)="onPointHover();" [style.width.px]="pointSize" [style.height.px]="pointSize"

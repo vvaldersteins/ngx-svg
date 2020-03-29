@@ -76,9 +76,13 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
         }
       }
 
+      // Let's update the height
+      if (changes.height && changes.height.currentValue !== changes.height.previousValue) {
+        this._svg.size('100%', changes.height.currentValue);
+      }
+
       // Check if any other input variables have changed
       if (
-        changes.height && changes.height.currentValue !== changes.height.previousValue ||
         changes.showGrid && changes.showGrid.currentValue !== changes.showGrid.previousValue ||
         changes.hoverable && changes.hoverable.currentValue !== changes.hoverable.previousValue ||
         changes.pointSize && changes.pointSize.currentValue !== changes.pointSize.previousValue
@@ -177,10 +181,14 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   setContainer(id: string) {
     // Assign viewbox only if it's defined
     if (this.viewBox && this.viewBox.length === 4) {
-      this._svg = SVG().addTo(id)
+      this._svg = SVG()
+        .addTo(`#${id}`)
+        .size('100%', this.height)
         .viewbox(this.viewBox[0], this.viewBox[1], this.viewBox[2], this.viewBox[3]);
     } else {
-      this._svg = SVG().addTo(id);
+      this._svg = SVG()
+        .addTo(`#${id}`)
+        .size('100%', this.height);
     }
   }
 

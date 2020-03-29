@@ -1,6 +1,13 @@
 {
   "name": "ngx-svg",
-  "version": "0.5.2",
+  "version": "1.0.0",
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "ngPackage": {
+    "whitelistedNonPeerDependencies": ["@svgdotjs/svg.js"],
+    "lib": {
+      "entryFile": "ngx_svg.ts"
+    }
+  },
   "description": "Angular Library for creating SVG elements.",
   "license": "MIT",
   "scripts": {
@@ -10,7 +17,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr": "ng-packagr -p ng-package.json"
+    "packagr": "ng-packagr -p package.json"
   },
   "repository": {
     "type": "git",

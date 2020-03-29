@@ -24,7 +24,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/svgjs/dist/svg.min.js"
+              "node_modules/@svgdotjs/svg.js/dist/svg.min.js"
             ]
           },
           "configurations": {
@@ -72,7 +72,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/svgjs/dist/svg.min.js"
+              "node_modules/@svgdotjs/svg.js/dist/svg.min.js"
             ],
             "styles": [
               "src/styles.css"

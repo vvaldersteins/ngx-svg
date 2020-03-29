@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 interface Image {
   imageUrl: string;
@@ -18,7 +18,7 @@ export class ImageComponent {
   /**
    * Globally used variables within the component.
    */
-  private images: Image[] = [{
+  public images: Image[] = [{
     imageUrl: 'ngx-svg/assets/dog.png',
     x: 100,
     y: 100,
@@ -29,11 +29,7 @@ export class ImageComponent {
   /**
    * Creates image component object instance.
    */
-  constructor(
-    private cdRef: ChangeDetectorRef
-  ) { }
-
-  onClick(event) { console.log(event); }
+  constructor() { }
 
   /**
    * Adds new image element.

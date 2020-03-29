@@ -18,7 +18,7 @@ export class RectComponent {
   /**
    * Globally used variables within the component.
    */
-  private rectangulars: Rectangular[] = [{
+  public rectangulars: Rectangular[] = [{
     height: 100,
     width: 200,
     color: 'rgba(125, 125, 32, 0.5)',

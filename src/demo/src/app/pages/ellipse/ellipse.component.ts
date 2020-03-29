@@ -18,7 +18,7 @@ export class EllipseComponent {
   /**
    * Globally used variables within the component.
    */
-  private ellipses: Ellipse[] = [{
+  public ellipses: Ellipse[] = [{
     height: 50,
     width: 100,
     color: 'rgba(125, 125, 32, 0.5)',

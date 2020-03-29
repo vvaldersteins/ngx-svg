@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 interface Circle {
   radius: number;
@@ -17,7 +17,7 @@ export class CircleComponent {
   /**
    * Globally used variables within the component.
    */
-  private circles: Circle[] = [{
+  public circles: Circle[] = [{
     radius: 45,
     color: 'rgba(125, 125, 32, 0.5)',
     x: 20,
@@ -32,9 +32,7 @@ export class CircleComponent {
   /**
    * Creates circle component object instance.
    */
-  constructor(
-    private cdRef: ChangeDetectorRef
-  ) { }
+  constructor() { }
 
   /**
    * Adds new circle element.

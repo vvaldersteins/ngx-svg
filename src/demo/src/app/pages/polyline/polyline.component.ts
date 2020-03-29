@@ -17,7 +17,7 @@ export class PolylineComponent {
   /**
    * Globally used variables within the component.
    */
-  private polylines: Polyline[] = [{
+  public polylines: Polyline[] = [{
     borderSize: 2,
     borderColor: 'rgba(125, 125, 32, 0.5)',
     fill: 'rgba(100, 100, 20, 0.2)',

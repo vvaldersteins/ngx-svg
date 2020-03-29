@@ -18,7 +18,7 @@ export class TextComponent {
   /**
    * Globally used variables within the component.
    */
-  private texts: Text[] = [{
+  public texts: Text[] = [{
     text: 'Wow! This is awesome text with an opacity!',
     size: 30,
     color: 'rgba(125, 125, 32, 0.5)',

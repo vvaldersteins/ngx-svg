@@ -19,7 +19,7 @@ export class LineComponent {
   /**
    * Globally used variables within the component.
    */
-  private lines: Line[] = [{
+  public lines: Line[] = [{
     borderSize: 10,
     borderColor: 'rgba(125, 125, 32, 0.5)',
     x0: 20,

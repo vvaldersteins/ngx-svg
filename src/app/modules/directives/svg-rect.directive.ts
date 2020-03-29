@@ -6,7 +6,7 @@ import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, On
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
+import { Rect } from '@svgdotjs/svg.js';
 
 /**
  * Import custom components.
@@ -20,7 +20,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _rect: SVG.Rect;
+  private _rect: Rect;
 
   /**
    * Import variables for the rectangular directive.
@@ -52,7 +52,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Creates or updates the rectangular object within the container
    */
   ngAfterViewChecked() {
-    // Check if container is creatted and no rectangular object is created
+    // Check if container is created and no rectangular object is created
     if (this._svgContainer.getContainer() && !this._rect) {
       this.createRect();
     }
@@ -70,13 +70,13 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
       // Check if classes were changed
       if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
         // Get classes that needs to be removed
-        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
-          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        const classesToRemove = changes.classes.previousValue.filter((previousClass: string) =>
+          !changes.classes.currentValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
-          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
+          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes

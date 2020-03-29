@@ -6,8 +6,7 @@ import { Component, AfterViewInit, Input, Output, EventEmitter, OnChanges, Simpl
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
-const svgFunc = SVG;
+import { SVG, Container } from '@svgdotjs/svg.js';
 
 @Component({
   selector: 'svg-container',
@@ -18,7 +17,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   /**
    * Globally used variables within the component.
    */
-  private _svg: SVG.Container;
+  private _svg: Container;
   public pointXCoordinate: number;
   public pointYCoordinate: number;
   public mouseInContainer = false;
@@ -108,8 +107,8 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
     // Set correct point coordinates
     if (this._triggerCoordinateChange) {
-      this.pointXCoordinate = event.layerX - this.pointSize / 2;
-      this.pointYCoordinate = event.layerY - this.pointSize / 2;
+      this.pointXCoordinate = event.offsetX - this.pointSize / 2;
+      this.pointYCoordinate = event.offsetY - this.pointSize / 2;
     }
 
     // Trigger coordinate change
@@ -128,8 +127,8 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
       });
     } else if (!this.hoverable) {
       this.mouseMoveEvent.emit({
-        x: event.layerX,
-        y: event.layerY
+        x: event.offsetX,
+        y: event.offsetY
       });
     }
   }
@@ -178,10 +177,10 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   setContainer(id: string) {
     // Assign viewbox only if it's defined
     if (this.viewBox && this.viewBox.length === 4) {
-      this._svg = svgFunc(id)
+      this._svg = SVG().addTo(id)
         .viewbox(this.viewBox[0], this.viewBox[1], this.viewBox[2], this.viewBox[3]);
     } else {
-      this._svg = svgFunc(id);
+      this._svg = SVG().addTo(id);
     }
   }
 
@@ -189,7 +188,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    * Retrieves container instance.
    * @returns SVG Container instance.
    */
-  getContainer(): SVG.Container {
+  getContainer(): Container {
     return this._svg;
   }
 }

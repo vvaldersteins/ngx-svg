@@ -6,7 +6,7 @@ import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, On
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
+import { Polygon, PointArrayAlias } from '@svgdotjs/svg.js';
 
 /**
  * Import custom components.
@@ -20,12 +20,12 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Globally used variables within the directive.
    */
-  private _polygon: SVG.Polygon;
+  private _polygon: Polygon;
 
   /**
    * Import variables for the polygon directive.
    */
-  @Input() points: SVG.PointArrayAlias; // Array with points in format [[x, y], [x1, y1], [x2, y2], ..., [xn, yn]].
+  @Input() points: PointArrayAlias; // Array with points in format [[x, y], [x1, y1], [x2, y2], ..., [xn, yn]].
   @Input() borderSize: number; // Size of the border.
   @Input() borderColor = '#000'; // Color of the polygon.
   @Input() fill = '#000'; // Color of the polygon body.
@@ -51,7 +51,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
    * Creates or updates the polygon object within the container.
    */
   ngAfterViewChecked() {
-    // Check if container is creatted and no polygon object is created
+    // Check if container is created and no polygon object is created
     if (this._svgContainer.getContainer() && !this._polygon) {
       this.createPolygon();
     }
@@ -69,13 +69,13 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
       // Check if classes were changed
       if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
         // Get classes that needs to be removed
-        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
-          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        const classesToRemove = changes.classes.previousValue.filter((previousClass: string) =>
+          !changes.classes.currentValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
-          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
+          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes

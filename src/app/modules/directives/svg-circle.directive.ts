@@ -6,7 +6,7 @@ import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, On
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
+import { Circle } from '@svgdotjs/svg.js';
 
 /**
  * Import custom components.
@@ -20,7 +20,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Globally used variables within the directive.
    */
-  private _circle: SVG.Circle;
+  private _circle: Circle;
 
   /**
    * Import variables for the circle directive.
@@ -51,7 +51,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
    * Creates the circle object within the container.
    */
   ngAfterViewChecked() {
-    // Check if container is creatted and no circle object is created
+    // Check if container is created and no circle object is created
     if (this._svgContainer.getContainer() && !this._circle) {
       this.createCircle();
     }
@@ -70,12 +70,12 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
       if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
         // Get classes that needs to be removed
         const classesToRemove = changes.classes.previousValue.filter(previousClass =>
-          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+          !changes.classes.currentValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Get classes that needs to be added
         const classesToAdd = changes.classes.currentValue.filter(previousClass =>
-          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes

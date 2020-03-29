@@ -6,7 +6,7 @@ import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, On
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
+import { Ellipse } from '@svgdotjs/svg.js';
 
 /**
  * Import custom components.
@@ -20,7 +20,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Globally used variables within the directive.
    */
-  private _ellipse: SVG.Ellipse;
+  private _ellipse: Ellipse;
 
   /**
    * Import variables for the ellipse directive.
@@ -51,7 +51,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
    * Creates or updates the ellipse object within the container
    */
   ngAfterViewChecked() {
-    // Check if container is creatted and no ellipse object is created
+    // Check if container is created and no ellipse object is created
     if (this._svgContainer.getContainer() && !this._ellipse) {
       this.createEllipse();
     }
@@ -69,13 +69,13 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
       // Check if classes were changed
       if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
         // Get classes that needs to be removed
-        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
-          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        const classesToRemove = changes.classes.previousValue.filter((previousClass: string) =>
+          !changes.classes.currentValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
-          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
+          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes

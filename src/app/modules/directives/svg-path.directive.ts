@@ -6,7 +6,7 @@ import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, On
 /**
  * Import third-party libraries.
  */
-import * as SVG from 'svgjs';
+import { Path } from '@svgdotjs/svg.js';
 
 /**
  * Import custom components.
@@ -20,7 +20,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _path: SVG.Path;
+  private _path: Path;
 
   /**
    * Import variables for the path directive.
@@ -53,7 +53,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Creates the path object within the container.
    */
   ngAfterViewChecked() {
-    // Check if container is creatted and no path object is created
+    // Check if container is created and no path object is created
     if (this._svgContainer.getContainer() && !this._path) {
       this.createPath();
     }
@@ -71,13 +71,13 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
       // Check if classes were changed
       if (changes.classes && changes.classes.currentValue !== changes.classes.previousValue) {
         // Get classes that needs to be removed
-        const classesToRemove = changes.classes.previousValue.filter(previousClass =>
-          !changes.classes.currentValue.some(currentClass => currentClass === previousClass)
+        const classesToRemove = changes.classes.previousValue.filter((previousClass: string) =>
+          !changes.classes.currentValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter(previousClass =>
-          !changes.classes.previousValue.some(currentClass => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
+          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes

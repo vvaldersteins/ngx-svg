@@ -92,7 +92,9 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
     this._text
       .text(this.text) // Update the text for the element
       .fill(this.color) // Update the color of the text
-      .size(this.size) // Update the size of the text
+      .font({
+        size: this.size // Update the size of the text
+      })
       .move(this.x, this.y); // Update the location of the text
   }
 
@@ -103,7 +105,9 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
     this._text = this._svgContainer.getContainer()
       .text(this.text) // Set the text for the element
       .fill(this.color) // Set the color of the text
-      .size(this.size) // Set the size of the text
+      .font({
+        size: this.size // Set the size of the text
+      })
       .move(this.x, this.y) // Set the location of the text
       .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
       .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event

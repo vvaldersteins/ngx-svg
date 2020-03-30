@@ -15,6 +15,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
+    "test:local": "ng test --watch=true",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p package.json"

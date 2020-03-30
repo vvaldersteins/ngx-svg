@@ -1,8 +1,12 @@
 <div [id]="containerId" class="svg-container" (mousemove)="mouseInContainer = true"
-  (mousemove)="adjustPointPosition($event); adjustMouseMovePosition($event);" (mouseenter)="mouseInContainer = true; mouseOverEvent.emit($event);"
-  (mouseleave)="mouseInContainer = false; mouseOutEvent.emit($event);">
-  <div class="svg-hover-point" (dblclick)="onPointDoubleClick()" (click)="onPointClick()" (mousemove)="onPointHover();" [style.width.px]="pointSize" [style.height.px]="pointSize"
-    *ngIf="hoverable && mouseInContainer" [style.left.px]="pointXCoordinate" [style.top.px]="pointYCoordinate"></div>
+  (mousemove)="adjustPointPosition($event); adjustMouseMovePosition($event)"
+  (mouseenter)="mouseInContainer = true; mouseOverEvent.emit($event)"
+  (mouseleave)="mouseInContainer = false; mouseOutEvent.emit($event)">
+  <div class="svg-hover-point" (dblclick)="onPointDoubleClick()"
+    (click)="onPointClick()" (mousemove)="onPointHover()"
+    [style.width.px]="pointSize" [style.height.px]="pointSize"
+    [style.left.px]="pointXCoordinate" [style.top.px]="pointYCoordinate"
+    *ngIf="hoverable && mouseInContainer"></div>
   
   <ng-content></ng-content>
 </div>

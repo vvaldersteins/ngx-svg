@@ -3,7 +3,9 @@
   "version": "1.0.2",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "ngPackage": {
-    "whitelistedNonPeerDependencies": ["@svgdotjs/svg.js"],
+    "whitelistedNonPeerDependencies": [
+      "@svgdotjs/svg.js"
+    ],
     "lib": {
       "entryFile": "ngx_svg.ts"
     }

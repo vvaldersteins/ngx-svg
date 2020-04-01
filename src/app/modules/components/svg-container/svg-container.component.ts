@@ -91,7 +91,6 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
       }
 
       // Let's update pattern in case grid was changed
-      // TODO: Still to test
       if (changes.showGrid || changes.grid) {
         // Update values
         this.grid = changes.grid ? changes.grid.currentValue : this.grid;

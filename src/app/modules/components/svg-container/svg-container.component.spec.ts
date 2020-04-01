@@ -105,6 +105,138 @@ describe('SVG Container Component', () => {
       });
     });
 
+    describe('showGrid and grid parameter change tests', () => {
+      it('Should not set grid parameters if we have set the showGrid to false', () => {
+        app.containerId = 'test-id';
+        fixture.detectChanges();
+        const changes = {
+          showGrid: new SimpleChange(true, false, false)
+        };
+
+        app.ngOnChanges(changes);
+
+        const container = app.getContainer();
+
+        expect(container).toBeDefined();
+        expect(container.children().length).toEqual(0);
+      });
+
+      describe('Default grid property tests', () => {
+        beforeEach(() => {
+          app.containerId = 'test-id';
+          fixture.detectChanges();
+          const changes = {
+            showGrid: new SimpleChange(false, true, true)
+          };
+
+          app.ngOnChanges(changes);
+        });
+
+        it('Should set pattern if we have set the showGrid to true', () => {
+          const container = app.getContainer();
+
+          expect(container).toBeDefined();
+          expect(container.children().length).toEqual(2);
+
+          // Let's get the pattern
+          const pattern = container.children()[0].children()[0];
+
+          // Let's check the pattern properties
+          expect(pattern).toBeDefined();
+          expect(pattern.attr().width).toEqual(10);
+          expect(pattern.attr().height).toEqual(10);
+
+          // Let's retrieve the pattern block element
+          const patternBlock = pattern.children()[0];
+
+          // Let's check the pattern block properties
+          expect(patternBlock).toBeDefined();
+          expect(patternBlock.attr().width).toEqual(10);
+          expect(patternBlock.attr().height).toEqual(10);
+          expect(patternBlock.attr().fill).toEqual('transparent');
+          expect(patternBlock.attr().stroke).toEqual('black');
+        });
+
+        it('Should create a custom grid element and add it to the svg container', () => {
+          const container = app.getContainer();
+
+          expect(container).toBeDefined();
+          expect(container.children().length).toEqual(2);
+
+          // Let's get the grid
+          const grid = container.children()[1];
+
+          // Let's get the pattern id
+          const patternId = container.children()[0].children()[0].id();
+
+          expect(grid).toBeDefined();
+          expect(grid.attr().width).toEqual('100%');
+          expect(grid.attr().height).toEqual('100%');
+          expect(grid.attr().fill).toEqual(`url(#${patternId})`);
+        });
+      });
+
+      describe('Custom grid property tests', () => {
+        beforeEach(() => {
+          app.containerId = 'test-id';
+          app.showGrid = true;
+          fixture.detectChanges();
+          const changes = {
+            grid: new SimpleChange(
+              { width: 10, height: 10, strokeColor: 'black' },
+              { width: 30, height: 20, strokeColor: 'red' },
+              true
+            )
+          };
+
+          app.ngOnChanges(changes);
+        });
+
+        it('Should set pattern if we have set the showGrid to true', () => {
+          const container = app.getContainer();
+
+          expect(container).toBeDefined();
+          expect(container.children().length).toEqual(2);
+
+          // Let's get the pattern
+          const pattern = container.children()[0].children()[0];
+
+          // Let's check the pattern properties
+          expect(pattern).toBeDefined();
+          expect(pattern.attr().width).toEqual(30);
+          expect(pattern.attr().height).toEqual(20);
+
+          // Let's retrieve the pattern block element
+          const patternBlock = pattern.children()[0];
+
+          // Let's check the pattern block properties
+          expect(patternBlock).toBeDefined();
+          expect(patternBlock.attr().width).toEqual(30);
+          expect(patternBlock.attr().height).toEqual(20);
+          expect(patternBlock.attr().fill).toEqual('transparent');
+          expect(patternBlock.attr().stroke).toEqual('red');
+        });
+
+        it('Should create a custom grid element and add it to the svg container', () => {
+          const container = app.getContainer();
+
+          expect(container).toBeDefined();
+          expect(container.children().length).toEqual(2);
+
+          // Let's get the grid
+          const grid = container.children()[1];
+
+          // Let's get the pattern id
+          const patternId = container.children()[0].children()[0].id();
+
+          expect(grid).toBeDefined();
+          expect(grid.attr().width).toEqual('100%');
+          expect(grid.attr().height).toEqual('100%');
+          expect(grid.attr().fill).toEqual(`url(#${patternId})`);
+        });
+      });
+    });
+
     /**
      * =============
      * =============

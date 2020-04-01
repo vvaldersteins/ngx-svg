@@ -1,5 +1,5 @@
-<div [id]="containerId" class="svg-container" (mousemove)="mouseInContainer = true"
-  (mousemove)="adjustPointPosition($event); adjustMouseMovePosition($event)"
+<div [id]="containerId" class="svg-container"
+  (mousemove)="mouseInContainer = true; adjustPointPosition($event); adjustMouseMovePosition($event)"
   (mouseenter)="mouseInContainer = true; mouseOverEvent.emit($event)"
   (mouseleave)="mouseInContainer = false; mouseOutEvent.emit($event)">
   <div class="svg-hover-point" (dblclick)="onPointDoubleClick()"

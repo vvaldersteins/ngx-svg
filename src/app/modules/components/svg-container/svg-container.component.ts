@@ -101,11 +101,15 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
       }
 
       // Check if any other input variables have changed
-      // TODO: Still to test
       if (
         changes.hoverable && changes.hoverable.currentValue !== changes.hoverable.previousValue ||
         changes.pointSize && changes.pointSize.currentValue !== changes.pointSize.previousValue
       ) {
+        // Update values
+        this.hoverable = changes.hoverable ? changes.hoverable.currentValue : this.hoverable;
+        this.pointSize = changes.pointSize ? changes.pointSize.currentValue : this.pointSize;
+
+        // Let's refresh the view
         this.cdRef.detectChanges();
       }
     }
@@ -129,7 +133,6 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   /**
    * Does all required pre-requisites and adjusts hoverable point position.
    * @param event - Mouse event handler from the DOM.
-   * // TODO: Still to test
    */
   adjustPointPosition(event: MouseEvent): void {
     // Return if we don't have hoverable enabled
@@ -150,10 +153,9 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   /**
    * Adjust the mouse move position, and sends out to the user.
    * @param event - Mouse event handler from the DOM.
-   * // TODO: Still to test
    */
   adjustMouseMovePosition(event: MouseEvent): void {
-    if ((this.hoverable && this._triggerCoordinateChange)) {
+    if (this.hoverable && this._triggerCoordinateChange) {
       this.mouseMoveEvent.emit({
         x: this.pointXCoordinate + this.pointSize / 2,
         y: this.pointYCoordinate + this.pointSize / 2
@@ -192,7 +194,10 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    */
   onPointDoubleClick(): void {
     // Let's fire double click event
-    this.doubleClickEvent.emit({ x: this.pointXCoordinate + this.pointSize / 2, y: this.pointYCoordinate + this.pointSize / 2 });
+    this.doubleClickEvent.emit({
+      x: this.pointXCoordinate + this.pointSize / 2,
+      y: this.pointYCoordinate + this.pointSize / 2
+    });
 
     // Let's set that double click has happened
     this._singleClickHappened = false;
@@ -200,7 +205,6 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
   /**
    * Make sure that we don't trigger coordinate change, if we hover point.
-   * // TODO: Still to test
    */
   onPointHover(): void {
     this._triggerCoordinateChange = false;

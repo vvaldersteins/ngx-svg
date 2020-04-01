@@ -105,6 +105,19 @@ describe('SVG Container Component', () => {
       });
     });
 
+    /**
+     * =============
+     * =============
+     * =============
+     * =============
+     * =============
+     * TODO: Finalize this test
+     * =============
+     * =============
+     * =============
+     * =============
+     * =============
+     */
     describe('hoverable and pointSize parameter change tests', () => {
       it('Should update HTML view with .svg-hover-point element if hoverable value changes to true', () => {
         app.containerId = 'test-id';

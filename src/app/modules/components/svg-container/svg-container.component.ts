@@ -22,6 +22,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   public mouseInContainer = false;
   private _svg: Container;
   private _grid: Rect;
+  private _pattern: Pattern;
   private _triggerCoordinateChange = false;
   private _singleClickHappened: boolean;
 
@@ -247,39 +248,36 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
    * Does all required pre-requisites and initializes or updates grid pattern.
    */
   private setGridPattern(): void {
-    // Let's create the pattern
-    const pattern = this._svg
-      .pattern(
-        this.grid.width,
-        this.grid.height,
-        (addedPattern: Pattern) => {
-          addedPattern
-            .rect(this.grid.width, this.grid.height)
-            .fill('transparent')
-            .stroke(this.grid.strokeColor);
-        }
-      );
+    // Let's remove old pattern if we have created one
+    if (this._pattern) {
+      this._pattern.remove();
+    }
 
-    // Let's check if we have disabled the grid
-    if (!this.showGrid) {
-      // We have disabled the grid, let's hide grid if it exists
-      if (this._grid) {
-        this._grid.hide();
-      }
-    } else {
-      // Let's create grid, if we haven't created one yet.
-      if (!this._grid) {
-        this._grid = this._svg
-          .rect()
-          .size('100%', '100%')
-          .fill(pattern);
-      } else {
-        // Let's show the grid
-        this._grid.show();
+    // Let's remove old grid if we have created one
+    if (this._grid) {
+      this._grid.remove();
+    }
 
-        // Let's update grid fill with the new pattern
-        this._grid.fill(pattern);
-      }
+    // Let's check if we want to show grid
+    if (this.showGrid) {
+      // Let's create the pattern
+      this._pattern = this._svg
+        .pattern(
+          this.grid.width,
+          this.grid.height,
+          (addedPattern: Pattern) => {
+            addedPattern
+              .rect(this.grid.width, this.grid.height)
+              .fill('transparent')
+              .stroke(this.grid.strokeColor);
+          }
+        );
+
+      // Let's create grid
+      this._grid = this._svg
+        .rect()
+        .size('100%', '100%')
+        .fill(this._pattern);
     }
   }
 }

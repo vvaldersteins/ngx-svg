@@ -50,7 +50,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Creates the circle object within the container.
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no circle object is created
     if (this._svgContainer.getContainer() && !this._circle) {
       this.createCircle();
@@ -58,10 +58,19 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    if (this._circle) {
+      this._circle.remove();
+    }
+  }
+
+  /**
    * Is called when changes are made to the circle object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._circle) {
       // If we have already created the object, update it.
       this.updateCircle();
@@ -87,7 +96,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Update circle object within the SVG container.
    */
-  updateCircle() {
+  private updateCircle(): void {
     this._circle
       .radius(this.radius) // Set the radius
       .fill(this.color) // Set the fill color
@@ -98,7 +107,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Create circle object within the SVG container.
    */
-  createCircle() {
+  private createCircle(): void {
     this._circle = this._svgContainer.getContainer()
       .circle(this.radius) // Create the circle with radius
       .fill(this.color) // Set the fill color
@@ -118,7 +127,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._circle
@@ -130,12 +139,5 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
       this._circle
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._circle.remove();
   }
 }

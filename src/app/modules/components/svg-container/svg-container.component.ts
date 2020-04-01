@@ -170,7 +170,6 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
   /**
    * Does all required pre-requisites when hovered point is clicked.
-   * // TODO: Still to test
    */
   onPointClick(): void {
     // Indicate that single click has happened.
@@ -190,7 +189,6 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
 
   /**
    * Does all required pre-requisites when hovered point is double clicked.
-   * // TODO: Still to test
    */
   onPointDoubleClick(): void {
     // Let's fire double click event

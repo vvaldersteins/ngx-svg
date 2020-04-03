@@ -191,7 +191,7 @@ describe('SVG Circle Directive', () => {
   });
 
   describe('ngOnChanges fn tests', () => {
-    it('Should all updateCircle and update all data', () => {
+    it('Should call updateCircle and update all data', () => {
       app.diameter = 5;
       app.x = 2;
       app.y = 2;

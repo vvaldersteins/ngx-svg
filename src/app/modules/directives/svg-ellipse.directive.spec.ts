@@ -193,7 +193,7 @@ describe('SVG Ellipse Directive', () => {
   });
 
   describe('ngOnChanges fn tests', () => {
-    it('Should all updateEllipse and update all data', () => {
+    it('Should call updateEllipse and update all data', () => {
       app.width = 5;
       app.height = 8;
       app.x = 2;

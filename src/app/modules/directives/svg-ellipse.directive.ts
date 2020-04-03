@@ -81,8 +81,8 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -111,10 +111,10 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
       .fill(this.color) // Set fill color
       .attr('cx', +this.x + +this.width) // Set x position
       .attr('cy', +this.y + +this.height) // Set y position
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
     // Add classes to the ellipse
     this.addRemoveClasses(this.classes);

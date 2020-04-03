@@ -50,7 +50,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Creates or updates the ellipse object within the container
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no ellipse object is created
     if (this._svgContainer.getContainer() && !this._ellipse) {
       this.createEllipse();
@@ -58,10 +58,17 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._ellipse.remove();
+  }
+
+  /**
    * Is called when changes are made to the ellipse object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._ellipse) {
       // If we have already created the object, update it.
       this.updateEllipse();
@@ -87,7 +94,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Update ellipse object within the SVG container.
    */
-  updateEllipse() {
+  private updateEllipse(): void {
     this._ellipse
       .size(this.width, this.height) // Update the width and height
       .fill(this.color) // Update the color
@@ -98,7 +105,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Create ellipse object within the SVG container.
    */
-  createEllipse() {
+  private createEllipse(): void {
     this._ellipse = this._svgContainer.getContainer()
       .ellipse(this.width, this.height) // Set height and width of the ellipse
       .fill(this.color) // Set fill color
@@ -109,8 +116,8 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
       .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-      // Add classes to the ellipse
-      this.addRemoveClasses(this.classes);
+    // Add classes to the ellipse
+    this.addRemoveClasses(this.classes);
   }
 
   /**
@@ -118,7 +125,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._ellipse
@@ -130,12 +137,5 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
       this._ellipse
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._ellipse.remove();
   }
 }

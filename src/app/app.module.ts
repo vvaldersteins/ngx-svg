@@ -10,21 +10,14 @@ import { FormsModule } from '@angular/forms';
  */
 import { NgxSvgModule } from './modules/core.module';
 
-/**
- * Import custom components.
- */
-import { AppComponent } from './app.component';
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
     FormsModule,
     NgxSvgModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }

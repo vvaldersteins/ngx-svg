@@ -1,0 +1,10 @@
+sudo: false
+
+language: node_js
+node_js:
+  - '12'
+
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov

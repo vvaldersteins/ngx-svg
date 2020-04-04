@@ -58,6 +58,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^13.11.0",
     "acorn": "^7.1.1",
+    "codecov": "^3.6.5",
     "codelyzer": "^5.2.2",
     "core-js": "^3.6.4",
     "karma": "^4.4.1",

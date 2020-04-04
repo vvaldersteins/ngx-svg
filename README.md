@@ -1,3 +1,6 @@
+[![codecov](https://codecov.io/gh/vvaldersteins/ngx-svg/branch/master/graph/badge.svg)](https://codecov.io/gh/vvaldersteins/ngx-svg)
+[![Build Status](https://travis-ci.org/vvaldersteins/ngx-svg.svg?branch=master)](https://travis-ci.org/vvaldersteins/ngx-svg)
+
 <a href="https://github.com/vvaldersteins/ngx-svg">
   <h1 align="center">ngx-svg</h1>
 </a>

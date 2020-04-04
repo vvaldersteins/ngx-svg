@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "test": "ng test",
+    "test": "ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
     "test:local": "ng test --watch=true --code-coverage",
     "lint": "ng lint",
     "packagr": "ng-packagr -p package.json"

@@ -51,7 +51,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Creates or updates the line object within the container.
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no line object is created
     if (this._svgContainer.getContainer() && !this._line) {
       this.createLine();
@@ -59,10 +59,17 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._line.remove();
+  }
+
+  /**
    * Is called when changes are made to the line object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._line) {
       // If we have already created the object, update it.
       this.updateLine();
@@ -75,8 +82,8 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -88,7 +95,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Update line object within the SVG container.
    */
-  updateLine() {
+  private updateLine(): void {
     this._line
       .plot(this.x0, this.y0, this.x1, this.y1) // Create the line at specific position
       .stroke({ color: this.borderColor, width: this.borderSize }); // Set the border for the line
@@ -97,14 +104,14 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Create line object within the SVG container.
    */
-  createLine() {
+  private createLine(): void {
     this._line = this._svgContainer.getContainer()
       .line(this.x0, this.y0, this.x1, this.y1) // Create the line at specific position
       .stroke({ color: this.borderColor, width: this.borderSize }) // Set the border for the line
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
       // Add classes to the line
       this.addRemoveClasses(this.classes);
@@ -115,7 +122,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._line
@@ -127,12 +134,5 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
       this._line
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._line.remove();
   }
 }

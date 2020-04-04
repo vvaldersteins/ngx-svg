@@ -15,10 +15,12 @@ module.exports = function (config) {
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    reporters: ['dots', 'coverage-istanbul'],
+    basePath: './src/app/',
+    reporters: ['dots'],
     coverageIstanbulReporter: {
-      reports: ['lcovonly'],
+      reports: ['lcov'],
       dir: path.join(__dirname, 'coverage'),
+      fixWebpackSourcePaths: true
     },
     customLaunchers: {
       ChromeHeadlessNoSandbox: {

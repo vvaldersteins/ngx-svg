@@ -18,6 +18,7 @@
             "scripts": [
               "node_modules/@svgdotjs/svg.js/dist/svg.min.js"
             ],
+            "codeCoverage": true,
             "styles": [],
             "assets": [
               "src/assets"

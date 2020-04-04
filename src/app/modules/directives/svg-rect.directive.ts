@@ -51,7 +51,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Creates or updates the rectangular object within the container
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no rectangular object is created
     if (this._svgContainer.getContainer() && !this._rect) {
       this.createRect();
@@ -59,10 +59,17 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._rect.remove();
+  }
+
+  /**
    * Is called when changes are made to the rect object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._rect) {
       // If we have already created the object, update it.
       this.updateRect();
@@ -75,8 +82,8 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -88,7 +95,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Update rectangular object within the SVG container.
    */
-  updateRect() {
+  private updateRect(): void {
     this._rect
       .size(this.width, this.height) // Update the width and height
       .fill(this.color) // Update the color
@@ -98,18 +105,18 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Create rectangular object within the SVG container.
    */
-  createRect() {
+  private createRect(): void {
     this._rect = this._svgContainer.getContainer()
       .rect(this.width, this.height) // Set height and width of the rect
       .fill(this.color) // Set fill color
       .move(this.x, this.y) // Set coordinates
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-      // Add classes to the rect
-      this.addRemoveClasses(this.classes);
+    // Add classes to the rect
+    this.addRemoveClasses(this.classes);
   }
 
   /**
@@ -117,7 +124,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._rect
@@ -129,12 +136,5 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
       this._rect
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._rect.remove();
   }
 }

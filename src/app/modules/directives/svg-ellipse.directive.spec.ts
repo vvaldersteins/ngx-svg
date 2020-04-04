@@ -127,8 +127,8 @@ describe('SVG Ellipse Directive', () => {
 
       expect(ellipse.getAttribute('rx')).toEqual('5'); // Half of the width
       expect(ellipse.getAttribute('ry')).toEqual('5'); // Half of the height
-      expect(ellipse.getAttribute('cx')).toEqual('10');
-      expect(ellipse.getAttribute('cy')).toEqual('10');
+      expect(ellipse.getAttribute('cx')).toEqual('5');
+      expect(ellipse.getAttribute('cy')).toEqual('5');
       expect(ellipse.getAttribute('fill')).toEqual('#000000');
       expect(ellipse.getAttribute('class')).toEqual('black-border');
     });
@@ -206,8 +206,8 @@ describe('SVG Ellipse Directive', () => {
 
       expect(ellipse.getAttribute('rx')).toEqual('2.5'); // Half of the width
       expect(ellipse.getAttribute('ry')).toEqual('4'); // Half of the height
-      expect(ellipse.getAttribute('cx')).toEqual('7');
-      expect(ellipse.getAttribute('cy')).toEqual('10');
+      expect(ellipse.getAttribute('cx')).toEqual('4.5');
+      expect(ellipse.getAttribute('cy')).toEqual('6');
       expect(ellipse.getAttribute('fill')).toEqual('#111111');
       expect(ellipse.getAttribute('class')).toEqual('black-border');
     });

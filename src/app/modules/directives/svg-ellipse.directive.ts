@@ -98,8 +98,8 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
     this._ellipse
       .size(this.width, this.height) // Update the width and height
       .fill(this.color) // Update the color
-      .attr('cx', +this.x + +this.width) // Set x position
-      .attr('cy', +this.y + +this.height); // Set y position
+      .attr('cx', +this.x + +this.width / 2) // Set x position
+      .attr('cy', +this.y + +this.height / 2); // Set y position
   }
 
   /**
@@ -109,8 +109,8 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
     this._ellipse = this._svgContainer.getContainer()
       .ellipse(this.width, this.height) // Set height and width of the ellipse
       .fill(this.color) // Set fill color
-      .attr('cx', +this.x + +this.width) // Set x position
-      .attr('cy', +this.y + +this.height) // Set y position
+      .attr('cx', +this.x + +this.width / 2) // Set x position
+      .attr('cy', +this.y + +this.height / 2) // Set y position
       .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
       .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event

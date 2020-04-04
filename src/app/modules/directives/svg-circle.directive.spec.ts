@@ -125,8 +125,8 @@ describe('SVG Circle Directive', () => {
       const circle = html.querySelector('circle');
 
       expect(circle.getAttribute('r')).toEqual('1'); // Half of the diameter
-      expect(circle.getAttribute('cx')).toEqual('2');
-      expect(circle.getAttribute('cy')).toEqual('2');
+      expect(circle.getAttribute('cx')).toEqual('1');
+      expect(circle.getAttribute('cy')).toEqual('1');
       expect(circle.getAttribute('fill')).toEqual('#000000');
       expect(circle.getAttribute('class')).toEqual('black-border');
     });
@@ -202,8 +202,8 @@ describe('SVG Circle Directive', () => {
       const circle = html.querySelector('circle');
 
       expect(circle.getAttribute('r')).toEqual('2.5'); // Half of the diameter
-      expect(circle.getAttribute('cx')).toEqual('7');
-      expect(circle.getAttribute('cy')).toEqual('7');
+      expect(circle.getAttribute('cx')).toEqual('4.5');
+      expect(circle.getAttribute('cy')).toEqual('4.5');
       expect(circle.getAttribute('fill')).toEqual('#111111');
       expect(circle.getAttribute('class')).toEqual('black-border');
     });

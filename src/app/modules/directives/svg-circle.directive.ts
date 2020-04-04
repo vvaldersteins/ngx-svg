@@ -99,8 +99,8 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
     this._circle
       .size(this.diameter) // Set the diameter (twice the radius)
       .fill(this.color) // Set the fill color
-      .attr('cx', +this.x + +this.diameter) // Set x position
-      .attr('cy', +this.y + +this.diameter); // Set y position
+      .attr('cx', +this.x + +this.diameter / 2) // Set x position
+      .attr('cy', +this.y + +this.diameter / 2); // Set y position
   }
 
   /**
@@ -110,8 +110,8 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
     this._circle = this._svgContainer.getContainer()
       .circle(this.diameter) // Create the circle with diameter (twice the radius)
       .fill(this.color) // Set the fill color
-      .attr('cx', +this.x + +this.diameter) // Set x position
-      .attr('cy', +this.y + +this.diameter) // Set y position
+      .attr('cx', +this.x + +this.diameter / 2) // Set x position
+      .attr('cy', +this.y + +this.diameter / 2) // Set y position
       .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
       .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event

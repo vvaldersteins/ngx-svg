@@ -50,7 +50,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Creates or updates the polygon object within the container.
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no polygon object is created
     if (this._svgContainer.getContainer() && !this._polygon) {
       this.createPolygon();
@@ -58,10 +58,17 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._polygon.remove();
+  }
+
+  /**
    * Is called when changes are made to the polygon object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._polygon) {
       // If we have already created the object, update it.
       this.updatePolygon();
@@ -74,8 +81,8 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -87,7 +94,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Update polygon object within the SVG container.
    */
-  updatePolygon() {
+  private updatePolygon(): void {
     this._polygon
       .plot(this.points) // Update the polygon object
       .fill(this.fill) // Fill color of the polygon
@@ -97,18 +104,18 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Create polygon object within the SVG container.
    */
-  createPolygon() {
+  private createPolygon(): void {
     this._polygon = this._svgContainer.getContainer()
       .polygon(this.points) // Create the polygon object
       .fill(this.fill) // Fill color of the polygon
       .stroke({ color: this.borderColor, width: this.borderSize }) // Set the border for the polygon
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-      // Add classes to the polygon
-      this.addRemoveClasses(this.classes);
+    // Add classes to the polygon
+    this.addRemoveClasses(this.classes);
   }
 
   /**
@@ -116,7 +123,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._polygon
@@ -128,12 +135,5 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
       this._polygon
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._polygon.remove();
   }
 }

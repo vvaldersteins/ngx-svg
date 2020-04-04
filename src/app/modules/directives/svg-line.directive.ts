@@ -113,8 +113,8 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-      // Add classes to the line
-      this.addRemoveClasses(this.classes);
+    // Add classes to the line
+    this.addRemoveClasses(this.classes);
   }
 
   /**

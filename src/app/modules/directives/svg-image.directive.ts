@@ -51,7 +51,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   /**
    * Creates the image object within the container.
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no image object is created
     if (this._svgContainer.getContainer() && !this._image) {
       this.createImage();
@@ -59,10 +59,17 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._image.remove();
+  }
+
+  /**
    * Is called when changes are made to the image object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     // Make sure we check it only when image is initialized
     if (this._image) {
       // Update image also in case image url has changed
@@ -87,8 +94,8 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -101,7 +108,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
    * Update image object within the SVG container.
    * @param reloadImage - Boolean indicator if image should be reloaded.
    */
-  updateImage(reloadImage: boolean) {
+  private updateImage(reloadImage: boolean): void {
     // Check if we have to update only image properties, or also image itself
     if (reloadImage) {
       this._image
@@ -118,19 +125,19 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   /**
    * Create image object within the SVG container.
    */
-  createImage() {
+  private createImage(): void {
     this._image = this._svgContainer.getContainer()
       .image() // Assign image object
       .load(this.imageUrl) // Load image
       .size(this.width, this.height) // Assign image size
       .move(this.x, this.y) // Assign position
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
-      // Add classes to the image
-      this.addRemoveClasses(this.classes);
+    // Add classes to the image
+    this.addRemoveClasses(this.classes);
   }
 
   /**
@@ -138,7 +145,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._image
@@ -150,12 +157,5 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
       this._image
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._image.remove();
   }
 }

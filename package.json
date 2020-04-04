@@ -1,9 +1,11 @@
 {
   "name": "ngx-svg",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "ngPackage": {
-    "whitelistedNonPeerDependencies": ["@svgdotjs/svg.js"],
+    "whitelistedNonPeerDependencies": [
+      "@svgdotjs/svg.js"
+    ],
     "lib": {
       "entryFile": "ngx_svg.ts"
     }
@@ -12,11 +14,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
     "test": "ng test",
+    "test:local": "ng test --watch=true --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "packagr": "ng-packagr -p package.json"
   },
   "repository": {
@@ -56,25 +56,22 @@
     "@angular/router": "^9.1.0",
     "@types/jasmine": "^3.5.10",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.9.5",
+    "@types/node": "^13.11.0",
     "acorn": "^7.1.1",
     "codelyzer": "^5.2.2",
     "core-js": "^3.6.4",
-    "jasmine-core": "^3.5.0",
-    "jasmine-spec-reporter": "^5.0.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "^3.1.1",
     "karma-jasmine-html-reporter": "^1.5.3",
     "ng-packagr": "^9.1.0",
-    "protractor": "^5.4.3",
-    "rxjs": "^6.5.4",
-    "rxjs-compat": "^6.5.4",
+    "rxjs": "^6.5.5",
+    "rxjs-compat": "^6.5.5",
     "ts-node": "^8.8.1",
     "tsickle": "^0.38.1",
     "tslib": "^1.11.1",
-    "tslint": "^6.1.0",
+    "tslint": "^6.1.1",
     "typescript": "^3.8.3",
     "zone.js": "^0.10.3"
   }

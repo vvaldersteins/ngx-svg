@@ -4,7 +4,7 @@
 import { Component } from '@angular/core';
 
 interface Circle {
-  radius: number;
+  diameter: number;
   color?: string;
   x?: number;
   y?: number;
@@ -18,12 +18,12 @@ export class CircleComponent {
    * Globally used variables within the component.
    */
   public circles: Circle[] = [{
-    radius: 45,
+    diameter: 45,
     color: 'rgba(125, 125, 32, 0.5)',
     x: 20,
     y: 30
   }, {
-    radius: 30,
+    diameter: 30,
     color: 'rgba(12, 32, 222, 0.7)',
     x: 70,
     y: 30
@@ -39,7 +39,7 @@ export class CircleComponent {
    */
   addNew() {
     this.circles.push({
-      radius: 0,
+      diameter: 0,
       color: '#000',
       x: 0,
       y: 0
@@ -51,7 +51,7 @@ export class CircleComponent {
    * @returns Height of the container.
    */
   getHeight(): number {
-    return Math.max.apply(Math, this.circles.map(el => el.radius * 2 + el.y)) + 20;
+    return Math.max.apply(Math, this.circles.map(el => el.diameter + el.y)) + 30;
   }
 
   /**

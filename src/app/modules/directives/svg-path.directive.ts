@@ -52,7 +52,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Creates the path object within the container.
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     // Check if container is created and no path object is created
     if (this._svgContainer.getContainer() && !this._path) {
       this.createPath();
@@ -60,10 +60,17 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   }
 
   /**
+   * Does all required pre-requisites before destroying the component.
+   */
+  ngOnDestroy(): void {
+    this._path.remove();
+  }
+
+  /**
    * Is called when changes are made to the path object.
    * @param changes - Angular Simple Changes object containing all of the changes.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this._path) {
       // If we have already created the object, update it.
       this.updatePath();
@@ -76,8 +83,8 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
         );
 
         // Get classes that needs to be added
-        const classesToAdd = changes.classes.currentValue.filter((previousClass: string) =>
-          !changes.classes.previousValue.some((currentClass: string) => currentClass === previousClass)
+        const classesToAdd = changes.classes.currentValue.filter((currentClass: string) =>
+          !changes.classes.previousValue.some((previousClass: string) => currentClass === previousClass)
         );
 
         // Add and remove classes
@@ -89,27 +96,27 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Update path object within the SVG container.
    */
-  updatePath() {
+  private updatePath(): void {
     this._path
       .plot(this.path) // Update the path for the element
       .stroke({ color: this.borderColor, width: this.borderSize }) // Update the border for the
-      .fill(this.fill === '' ? 'rgba(0, 0, 0, 0)' : this.fill) // Update fill of the path
+      .fill(this.fill || 'rgba(0, 0, 0, 0)') // Update fill of the path
       .move(this.x, this.y); // Update the location of the path
   }
 
   /**
    * Create path object within the SVG container.
    */
-  createPath() {
+  private createPath(): void {
     this._path = this._svgContainer.getContainer()
       .path(this.path) // Set the path for the element
       .stroke({ color: this.borderColor, width: this.borderSize }) // Set the border for the path
-      .fill(this.fill === '' ? 'rgba(0, 0, 0, 0)' : this.fill) // Set fill of the path
+      .fill(this.fill || 'rgba(0, 0, 0, 0)') // Set fill of the path
       .move(this.x, this.y) // Set the location of the path
-      .on('click', evt => this.clickEvent.emit(evt)) // Assign click event
-      .on('dblclick', evt => this.doubleClickEvent.emit(evt)) // Assign double click event
-      .on('mouseover', evt => this.mouseOverEvent.emit(evt)) // Assign mouse over event
-      .on('mouseout', evt => this.mouseOutEvent.emit(evt)); // Assign mouse out event
+      .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
+      .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
+      .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
+      .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
     // Add classes to the path
     this.addRemoveClasses(this.classes);
@@ -120,7 +127,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * @param classesToAdd - List of classes, which needs to be added.
    * @param classesToRemove - List of classes, which needs to be removed.
    */
-  addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []) {
+  private addRemoveClasses(classesToAdd: string[], classesToRemove: string[] = []): void {
     // First let's remove classes, that are not necessary anymore
     for (const classToRemove of classesToRemove) {
       this._path
@@ -132,12 +139,5 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
       this._path
         .addClass(classToAdd);
     }
-  }
-
-  /**
-   * Does all required pre-requisites before destroying the component.
-   */
-  ngOnDestroy() {
-    this._path.remove();
   }
 }

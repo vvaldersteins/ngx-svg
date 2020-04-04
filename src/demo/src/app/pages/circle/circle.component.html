@@ -10,7 +10,7 @@
     <div class="col-12">
       <!-- Svg Container with circles -->
       <svg-container containerId="circle" [height]="getHeight()">
-        <svg-circle [radius]="circle.radius" [color]="circle.color"
+        <svg-circle [diameter]="circle.diameter" [color]="circle.color"
           [x]="circle.x" [y]="circle.y" *ngFor="let circle of circles"></svg-circle>
       </svg-container>
     </div>
@@ -22,7 +22,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Radius</th>
+              <th>Diameter</th>
               <th>Color</th>
               <th>X position</th>
               <th>Y position</th>
@@ -36,7 +36,7 @@
                   <b>{{ index + 1 }}</b>
                 </td>
                 <td>
-                  <input type="number" [(ngModel)]="circle.radius" class="form-control" />
+                  <input type="number" [(ngModel)]="circle.diameter" class="form-control" />
                 </td>
                 <td>
                   <input type="string" [(ngModel)]="circle.color" class="form-control" />

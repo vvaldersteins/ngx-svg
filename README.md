@@ -135,7 +135,7 @@ To add a circle element to the svg-container, you must add the following element
 You can provide following parameters for the element
 
 ```
-  radius: Radius of the circle. (MANDATORY)
+  diameter: Diameter of the circle (twice the radius). (MANDATORY)
   color: Background color of the circle. (OPTIONAL, Defaults to '#000')
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)

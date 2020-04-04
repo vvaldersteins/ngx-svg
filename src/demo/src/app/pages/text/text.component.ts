@@ -55,7 +55,7 @@ export class TextComponent {
    * @returns Height of the container.
    */
   getHeight(): number {
-    return Math.max.apply(Math, this.texts.map(el => el.y)) + 20;
+    return Math.max.apply(Math, this.texts.map(el => el.y + el.size)) + 20;
   }
 
   /**

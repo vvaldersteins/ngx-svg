@@ -126,7 +126,6 @@ describe('SVG Text Directive', () => {
       const text = html.querySelector('text');
 
       expect(text.getAttribute('x')).toEqual('0');
-      expect(text.getAttribute('y')).toEqual('-4');
       expect(text.getAttribute('font-size')).toEqual('10');
       expect(text.getAttribute('fill')).toEqual('#000000');
       expect(text.getAttribute('class')).toEqual('black-border');
@@ -208,7 +207,6 @@ describe('SVG Text Directive', () => {
 
       expect(text.getAttribute('font-size')).toEqual('15');
       expect(text.getAttribute('x')).toEqual('2');
-      expect(text.getAttribute('y')).toEqual('-3.5');
       expect(text.getAttribute('fill')).toEqual('#111111');
       expect(text.getAttribute('class')).toEqual('black-border');
       expect(text.querySelector('tspan').getAttribute('x')).toEqual('2');

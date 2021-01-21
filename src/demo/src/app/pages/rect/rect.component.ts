@@ -9,6 +9,8 @@ interface Rectangular {
   color?: string;
   x?: number;
   y?: number;
+  rx?: number;
+  ry?: number;
 }
 
 @Component({
@@ -23,13 +25,17 @@ export class RectComponent {
     width: 200,
     color: 'rgba(125, 125, 32, 0.5)',
     x: 20,
-    y: 30
+    y: 30,
+    rx: 0,
+    ry: 0
   }, {
     height: 50,
     width: 50,
     color: 'rgba(12, 32, 222, 0.7)',
     x: 200,
-    y: 20
+    y: 20,
+    rx: 10,
+    ry: 15
   }];
 
   /**
@@ -46,7 +52,9 @@ export class RectComponent {
       width: 0,
       color: '#000',
       x: 0,
-      y: 0
+      y: 0,
+      rx: 0,
+      ry: 0
     });
   }
 

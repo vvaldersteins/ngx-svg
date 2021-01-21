@@ -11,7 +11,8 @@
       <!-- Svg Container with rectangulars -->
       <svg-container containerId="rectangular" [height]="getHeight()">
         <svg-rect [height]="rectangular.height" [width]="rectangular.width" [color]="rectangular.color"
-          [x]="rectangular.x" [y]="rectangular.y" *ngFor="let rectangular of rectangulars"></svg-rect>
+          [rx]="rectangular.rx" [ry]="rectangular.ry" [x]="rectangular.x" [y]="rectangular.y"
+          *ngFor="let rectangular of rectangulars"></svg-rect>
       </svg-container>
     </div>
 
@@ -27,6 +28,8 @@
               <th>Color</th>
               <th>X position</th>
               <th>Y position</th>
+              <th>X radius (rx)</th>
+              <th>Y radius (ry)</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -52,19 +55,25 @@
                   <input type="number" [(ngModel)]="rectangular.y" class="form-control" />
                 </td>
                 <td>
+                  <input type="number" [(ngModel)]="rectangular.rx" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.ry" class="form-control" />
+                </td>
+                <td>
                   <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
                 </td>
               </tr>
             </ng-container>
             <tr *ngIf="rectangulars.length === 0">
-              <td colspan="7" class="text-center">
+              <td colspan="9" class="text-center">
                 There are no rectangulars
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="7">
+              <td colspan="9">
                 <button class="btn btn-success float-right" (click)="addNew()">Add New Rectangular</button>
               </td>
             </tr>

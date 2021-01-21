@@ -30,6 +30,8 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Input() color = '#000'; // Color of the rectangular background
   @Input() x = 0; // Starting point on x axis.
   @Input() y = 0; // Starting point on y axis.
+  @Input() rx = 0; // Radius for x axis.
+  @Input() ry = 0; // Radius for y axis.
   @Input() classes: string[] = []; // List of CSS classes which needs to be added.
 
   /**
@@ -99,6 +101,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
     this._rect
       .size(this.width, this.height) // Update the width and height
       .fill(this.color) // Update the color
+      .radius(this.rx, this.ry) // Update the radius
       .move(this.x, this.y); // Update the coordinates
   }
 
@@ -110,6 +113,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .rect(this.width, this.height) // Set height and width of the rect
       .fill(this.color) // Set fill color
       .move(this.x, this.y) // Set coordinates
+      .radius(this.rx, this.ry) // Set radius
       .on('click', (evt: MouseEvent) => this.clickEvent.emit(evt)) // Assign click event
       .on('dblclick', (evt: MouseEvent) => this.doubleClickEvent.emit(evt)) // Assign double click event
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event

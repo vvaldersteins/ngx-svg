@@ -19,6 +19,7 @@ import { SvgRectDirective } from './svg-rect.directive';
   template: `
     <svg-container containerId="test-id">
       <svg-rect [height]="height" [width]="width" [color]="color"
+        [rx]="rx" [ry]="ry"
         [x]="x" [y]="y" [classes]="classes"
         (clickEvent)="eventCalled()"
         (doubleClickEvent)="eventCalled()"
@@ -38,6 +39,8 @@ class TestComponent implements OnInit {
   public width = 10;
   public x = 0;
   public y = 0;
+  public rx = 0;
+  public ry = 0;
   public classes = ['black-border'];
 
   /**
@@ -129,6 +132,8 @@ describe('SVG Rect Directive', () => {
       expect(rect.getAttribute('height')).toEqual('10');
       expect(rect.getAttribute('x')).toEqual('0');
       expect(rect.getAttribute('y')).toEqual('0');
+      expect(rect.getAttribute('rx')).toEqual('0');
+      expect(rect.getAttribute('ry')).toEqual('0');
       expect(rect.getAttribute('fill')).toEqual('#000000');
       expect(rect.getAttribute('class')).toEqual('black-border');
     });
@@ -198,6 +203,8 @@ describe('SVG Rect Directive', () => {
       app.height = 8;
       app.x = 2;
       app.y = 2;
+      app.rx = 10;
+      app.ry = 5;
       app.color = '#111';
 
       fixture.detectChanges();
@@ -208,6 +215,8 @@ describe('SVG Rect Directive', () => {
       expect(rect.getAttribute('height')).toEqual('8');
       expect(rect.getAttribute('x')).toEqual('2');
       expect(rect.getAttribute('y')).toEqual('2');
+      expect(rect.getAttribute('rx')).toEqual('10');
+      expect(rect.getAttribute('ry')).toEqual('5');
       expect(rect.getAttribute('fill')).toEqual('#111111');
       expect(rect.getAttribute('class')).toEqual('black-border');
     });

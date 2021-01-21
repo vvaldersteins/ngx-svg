@@ -124,6 +124,8 @@ You can provide following parameters for the element
   color: Background color of the rectangular. (OPTIONAL, Defaults to '#000')
   x: Starting point on x axis. (OPTIONAL, Defaults to 0)
   y: Starting point on y axis. (OPTIONAL, Defaults to 0)
+  rx: Radius for the x axis. (OPTIONAL, Defaults to 0)
+  ry: Radius for the y axis. (OPTIONAL, Defaults to 0)
   classes: List of CSS classes which will be added. (OPTIONAL, Defaults to empty string array)
 ```
 

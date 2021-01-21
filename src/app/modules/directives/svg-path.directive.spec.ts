@@ -2,7 +2,7 @@
  * Import Angular libraries.
  */
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from '@angular/core/testing';
 
 /**
  * Import custom components.
@@ -67,7 +67,7 @@ describe('SVG Path Directive', () => {
   let fixture: ComponentFixture<TestComponent>;
   let html: HTMLElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [

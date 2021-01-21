@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import { TestBed, ComponentFixture, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { SimpleChange } from '@angular/core';
 
 /**
@@ -14,7 +14,7 @@ describe('SVG Container Component', () => {
   let fixture: ComponentFixture<SvgContainerComponent>;
   let html: HTMLElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [

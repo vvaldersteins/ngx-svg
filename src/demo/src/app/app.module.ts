@@ -68,9 +68,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(
-      routes
-    ),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     NgxSvgModule,
     FormsModule
   ],

@@ -16,7 +16,7 @@
     "ng": "ng",
     "test": "ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
     "test:local": "ng test --watch=true --code-coverage",
-    "ng:update": "ng update @angular/core @angular/cli",
+    "ng:update": "ng update @angular/core @angular/cli --force",
     "lint": "ng lint",
     "packagr": "ng-packagr -p package.json"
   },

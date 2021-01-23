@@ -1,6 +1,6 @@
 {
   "name": "ngx-svg",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "ngPackage": {
     "whitelistedNonPeerDependencies": [

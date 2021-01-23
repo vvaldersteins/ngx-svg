@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -43,9 +43,11 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Create SVG Line directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
   ) { }
 
   /**
@@ -99,6 +101,9 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
     this._line
       .plot(this.x0, this.y0, this.x1, this.y1) // Create the line at specific position
       .stroke({ color: this.borderColor, width: this.borderSize }); // Set the border for the line
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -113,8 +118,24 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the line
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._line.position() !== position) {
+      this._line.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

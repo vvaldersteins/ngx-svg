@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -45,10 +45,12 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Create SVG Rect directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
-  ) { }
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
+  ) {}
 
   /**
    * Creates or updates the rectangular object within the container
@@ -103,6 +105,9 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .fill(this.color) // Update the color
       .radius(this.rx, this.ry) // Update the radius
       .move(this.x, this.y); // Update the coordinates
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -119,8 +124,24 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the rect
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._rect.position() !== position) {
+      this._rect.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

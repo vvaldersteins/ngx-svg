@@ -12,6 +12,9 @@
 # dependencies
 /node_modules
 
+# Local demo
+/src/demo-local
+
 # IDEs and editors
 /.idea
 .project

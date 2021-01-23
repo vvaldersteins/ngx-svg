@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -44,9 +44,11 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Create SVG Path directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
   ) { }
 
   /**
@@ -102,6 +104,9 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .stroke({ color: this.borderColor, width: this.borderSize }) // Update the border for the
       .fill(this.fill || 'rgba(0, 0, 0, 0)') // Update fill of the path
       .move(this.x, this.y); // Update the location of the path
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -118,8 +123,24 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the path
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._path.position() !== position) {
+      this._path.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

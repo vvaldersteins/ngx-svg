@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, OnDestroy, AfterViewChecked, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -42,9 +42,11 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Create SVG Circle directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
   ) { }
 
   /**
@@ -101,6 +103,9 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
       .fill(this.color) // Set the fill color
       .attr('cx', +this.x + +this.diameter / 2) // Set x position
       .attr('cy', +this.y + +this.diameter / 2); // Set y position
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -117,8 +122,24 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the circle
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._circle.position() !== position) {
+      this._circle.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

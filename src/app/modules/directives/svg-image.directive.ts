@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, OnDestroy, EventEmitter, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -43,9 +43,11 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   /**
    * Create SVG image directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
   ) { }
 
   /**
@@ -120,6 +122,9 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
         .size(this.width, this.height) // Update image size
         .move(this.x, this.y); // Update image position
     }
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -136,8 +141,24 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the image
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._image.position() !== position) {
+      this._image.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

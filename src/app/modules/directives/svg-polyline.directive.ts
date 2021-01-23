@@ -1,7 +1,7 @@
 /**
  * Import Angular libraries.
  */
-import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, Input, Output, AfterViewChecked, EventEmitter, OnDestroy, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 /**
  * Import third-party libraries.
@@ -42,9 +42,11 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
   /**
    * Create SVG Polyline directive.
    * @param _svgContainer - Host SVG Container Component object instance.
+   * @param _elRef - Angular element reference object instance.
    */
   constructor(
-    private _svgContainer: SvgContainerComponent
+    private _svgContainer: SvgContainerComponent,
+    private _elRef: ElementRef
   ) { }
 
   /**
@@ -99,6 +101,9 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
       .plot(this.points) // Update the polyline object
       .fill(this.fill) // Fill color of the polyline
       .stroke({ color: this.borderColor, width: this.borderSize }); // Set the border for the polyline
+
+    // Let's set element in a correct position
+    this.setCorrectPosition();
   }
 
   /**
@@ -114,8 +119,24 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
       .on('mouseover', (evt: MouseEvent) => this.mouseOverEvent.emit(evt)) // Assign mouse over event
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
+    // Let's set element in a correct position
+    this.setCorrectPosition();
+
     // Add classes to the polyline
     this.addRemoveClasses(this.classes);
+  }
+
+  /**
+   * Sets correct position for the element.
+   */
+  private setCorrectPosition() {
+    // Find position of an element within the parent container
+    const position = Array.prototype.slice.call(this._elRef.nativeElement.parentElement.children).indexOf(this._elRef.nativeElement);
+
+    // Let's update and insert element in a correct position.
+    if (this._svgContainer.getContainer().get(position) && this._polyline.position() !== position) {
+      this._polyline.insertBefore(this._svgContainer.getContainer().get(position));
+    }
   }
 
   /**

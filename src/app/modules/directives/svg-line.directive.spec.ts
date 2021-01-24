@@ -24,6 +24,7 @@ import { SvgLineDirective } from './svg-line.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createLine"></svg-line>
     </svg-container>
   `
@@ -133,6 +134,19 @@ describe('SVG Line Directive', () => {
       expect(line.getAttribute('stroke')).toEqual('#000000');
       expect(line.getAttribute('stroke-width')).toEqual('1');
       expect(line.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on line creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createLine = false;
+
+      fixture.detectChanges();
+
+      app.createLine = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

@@ -24,6 +24,7 @@ import { SvgCircleDirective } from './svg-circle.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createCircle"></svg-circle>
     </svg-container>
   `
@@ -129,6 +130,19 @@ describe('SVG Circle Directive', () => {
       expect(circle.getAttribute('cy')).toEqual('1');
       expect(circle.getAttribute('fill')).toEqual('#000000');
       expect(circle.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on circle creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createCircle = false;
+
+      fixture.detectChanges();
+
+      app.createCircle = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

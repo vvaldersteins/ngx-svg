@@ -82,6 +82,7 @@ doubleClickEvent: Is fired when double click event happens on the hovered point 
 mouseOverEvent: Is fired when mouse is moved over the container. (OUTPUT PARAMETER)
 mouseOutEvent: Is fired when mouse exits the container area. (OUTPUT PARAMETER)
 mouseMoveEvent: Is fired when mouse moves within the container area. (OUTPUT PARAMETER)
+onInitialize: Is fired when container element is created. Returns created container element. (OUTPUT PARAMETER)
 ```
 
 # Elements
@@ -267,13 +268,12 @@ You can provide following parameters for the element
 Each of the above elements has a list of events that are available to be attached.
 
 ```
-  clickEvent: Is fired when click event happens on the element.
-  doubleClickEvent: Is fired when double click event happens on the element.
-  mouseOverEvent: Is fired when mouse is moved over the element.
-  mouseOutEvent: Is fired when mouse is moved out of the element.
+  clickEvent: Is fired when click event happens on the element. Returns an instance of `MouseEvent`.
+  doubleClickEvent: Is fired when double click event happens on the element. Returns an instance of `MouseEvent`.
+  mouseOverEvent: Is fired when mouse is moved over the element. Returns an instance of `MouseEvent`.
+  mouseOutEvent: Is fired when mouse is moved out of the element. Returns an instance of `MouseEvent`.
+  onInitialize: Is fired when the element is created. Returns instance of the created element type.
 ```
-
-Each of the events returns an instance of `MouseEvent`.
 
 # Demo
 

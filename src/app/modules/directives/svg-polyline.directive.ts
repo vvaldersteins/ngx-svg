@@ -38,6 +38,7 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Polyline> = new EventEmitter();
 
   /**
    * Create SVG Polyline directive.
@@ -124,6 +125,9 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
 
     // Add classes to the polyline
     this.addRemoveClasses(this.classes);
+
+    // Let's output the polyline element
+    this.onInitialize.emit(this._polyline);
   }
 
   /**

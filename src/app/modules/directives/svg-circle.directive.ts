@@ -38,6 +38,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Circle> = new EventEmitter();
 
   /**
    * Create SVG Circle directive.
@@ -127,6 +128,9 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
 
     // Add classes to the circle
     this.addRemoveClasses(this.classes);
+
+    // Let's output the circle element
+    this.onInitialize.emit(this._circle);
   }
 
   /**

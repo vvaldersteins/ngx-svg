@@ -38,6 +38,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Polygon> = new EventEmitter();
 
   /**
    * Create SVG Polygon directive.
@@ -124,6 +125,9 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
 
     // Add classes to the polygon
     this.addRemoveClasses(this.classes);
+
+    // Let's output the polygon element
+    this.onInitialize.emit(this._polygon);
   }
 
   /**

@@ -24,6 +24,7 @@ import { SvgTextDirective } from './svg-text.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createText"></svg-text>
     </svg-container>
   `
@@ -132,6 +133,19 @@ describe('SVG Text Directive', () => {
       expect(text.querySelector('tspan').getAttribute('x')).toEqual('0');
       expect(text.querySelector('tspan').getAttribute('dy')).toEqual('13');
       expect(text.querySelector('tspan').textContent).toEqual('Test text');
+    });
+
+    it('Should emit onInitialize on text creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createText = false;
+
+      fixture.detectChanges();
+
+      app.createText = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

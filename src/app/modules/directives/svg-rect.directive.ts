@@ -41,6 +41,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Rect> = new EventEmitter();
 
   /**
    * Create SVG Rect directive.
@@ -129,6 +130,9 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
 
     // Add classes to the rect
     this.addRemoveClasses(this.classes);
+
+    // Let's output the rect element
+    this.onInitialize.emit(this._rect);
   }
 
   /**

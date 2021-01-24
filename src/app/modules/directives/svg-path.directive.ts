@@ -40,6 +40,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Path> = new EventEmitter();
 
   /**
    * Create SVG Path directive.
@@ -128,6 +129,9 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
 
     // Add classes to the path
     this.addRemoveClasses(this.classes);
+
+    // Let's output the path element
+    this.onInitialize.emit(this._path);
   }
 
   /**

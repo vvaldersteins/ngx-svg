@@ -38,6 +38,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Ellipse> = new EventEmitter();
 
   /**
    * Create SVG Ellipse directive.
@@ -126,6 +127,9 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
 
     // Add classes to the ellipse
     this.addRemoveClasses(this.classes);
+
+    // Let's output the ellipse element
+    this.onInitialize.emit(this._ellipse);
   }
 
   /**

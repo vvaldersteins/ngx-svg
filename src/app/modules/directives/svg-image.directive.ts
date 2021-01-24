@@ -39,6 +39,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Image> = new EventEmitter();
 
   /**
    * Create SVG image directive.
@@ -146,6 +147,9 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
 
     // Add classes to the image
     this.addRemoveClasses(this.classes);
+
+    // Let's output the image element
+    this.onInitialize.emit(this._image);
   }
 
   /**

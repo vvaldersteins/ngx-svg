@@ -25,6 +25,7 @@ import { SvgRectDirective } from './svg-rect.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createRect"></svg-rect>
     </svg-container>
   `
@@ -136,6 +137,19 @@ describe('SVG Rect Directive', () => {
       expect(rect.getAttribute('ry')).toEqual('0');
       expect(rect.getAttribute('fill')).toEqual('#000000');
       expect(rect.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on rectangular creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createRect = false;
+
+      fixture.detectChanges();
+
+      app.createRect = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

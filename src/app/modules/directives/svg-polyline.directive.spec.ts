@@ -24,6 +24,7 @@ import { SvgPolylineDirective } from './svg-polyline.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createPolyline"></svg-polyline>
     </svg-container>
   `
@@ -129,6 +130,19 @@ describe('SVG Polyline Directive', () => {
       expect(polyline.getAttribute('stroke-width')).toEqual('1');
       expect(polyline.getAttribute('fill')).toEqual('#111111');
       expect(polyline.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on polyline creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createPolyline = false;
+
+      fixture.detectChanges();
+
+      app.createPolyline = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

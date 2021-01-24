@@ -24,6 +24,7 @@ import { SvgEllipseDirective } from './svg-ellipse.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createEllipse"></svg-ellipse>
     </svg-container>
   `
@@ -131,6 +132,19 @@ describe('SVG Ellipse Directive', () => {
       expect(ellipse.getAttribute('cy')).toEqual('5');
       expect(ellipse.getAttribute('fill')).toEqual('#000000');
       expect(ellipse.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on ellipse creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createEllipse = false;
+
+      fixture.detectChanges();
+
+      app.createEllipse = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

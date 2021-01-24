@@ -376,6 +376,19 @@ describe('SVG Container Component', () => {
       expect(container.attr().height).toEqual(200);
       expect(container.attr().viewBox).toEqual('10 10 500 600');
     });
+    
+    it('Should call onInitialize event emitter and return created svg element', () => {
+      spyOn(app.onInitialize, 'emit');
+      app.containerId = 'test-id';
+      app.height = 200;
+      app.viewBox = [10, 10, 500, 600];
+      fixture.detectChanges();
+
+      const container = app.getContainer();
+      
+      expect(app.onInitialize.emit).toHaveBeenCalledTimes(1);
+      expect(app.onInitialize.emit).toHaveBeenCalledWith(container);
+    });
 
     describe('Should test setGridPattern outcome', () => {
       it('Should not set grid parameters if we have set the showGrid to false', () => {

@@ -39,6 +39,7 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
   @Output() doubleClickEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOverEvent: EventEmitter<MouseEvent> = new EventEmitter();
   @Output() mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() onInitialize: EventEmitter<Text> = new EventEmitter();
 
   /**
    * Create SVG Text directive.
@@ -131,6 +132,9 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
 
     // Add classes to the text
     this.addRemoveClasses(this.classes);
+
+    // Let's output the text element
+    this.onInitialize.emit(this._text);
   }
 
   /**

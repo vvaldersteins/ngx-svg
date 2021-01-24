@@ -24,6 +24,7 @@ import { SvgImageDirective } from './svg-image.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createImage"></svg-image>
     </svg-container>
   `
@@ -131,6 +132,19 @@ describe('SVG Image Directive', () => {
       expect(image.getAttribute('height')).toEqual('10');
       expect(image.getAttribute('href')).toEqual('https://vvaldersteins.github.io/ngx-svg/assets/dog.png');
       expect(image.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on image creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createImage = false;
+
+      fixture.detectChanges();
+
+      app.createImage = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

@@ -24,6 +24,7 @@ import { SvgPolygonDirective } from './svg-polygon.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createPolygon"></svg-polygon>
     </svg-container>
   `
@@ -129,6 +130,19 @@ describe('SVG Polygon Directive', () => {
       expect(polygon.getAttribute('stroke-width')).toEqual('1');
       expect(polygon.getAttribute('fill')).toEqual('#111111');
       expect(polygon.getAttribute('class')).toEqual('black-border');
+    });
+
+    it('Should emit onInitialize on polygon creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createPolygon = false;
+
+      fixture.detectChanges();
+
+      app.createPolygon = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

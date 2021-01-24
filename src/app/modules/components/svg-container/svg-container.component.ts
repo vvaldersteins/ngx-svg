@@ -56,6 +56,7 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
   @Output() public mouseOutEvent: EventEmitter<MouseEvent> = new EventEmitter(); // Event handler when the mouse exits the container.
   @Output() public mouseMoveEvent: EventEmitter<{ x: number, y: number }> = new EventEmitter();
     // Event handler when the mouse is being moved on the container.
+  @Output() public onInitialize: EventEmitter<Container> = new EventEmitter();
 
   /**
    * Create SVG Container component instance.
@@ -243,6 +244,9 @@ export class SvgContainerComponent implements AfterViewInit, OnChanges {
     if (this.showGrid) {
       this.setGridPattern();
     }
+
+    // Let's output the svg container element
+    this.onInitialize.emit(this._svg);
   }
 
   /**

@@ -24,6 +24,7 @@ import { SvgPathDirective } from './svg-path.directive';
         (doubleClickEvent)="eventCalled()"
         (mouseOverEvent)="eventCalled()"
         (mouseOutEvent)="eventCalled()"
+        (onInitialize)="eventCalled()"
         *ngIf="createPath"></svg-path>
     </svg-container>
   `
@@ -145,6 +146,19 @@ describe('SVG Path Directive', () => {
       path = html.querySelector('path');
 
       expect(path.getAttribute('fill')).toEqual('rgba(0, 0, 0, 0)');
+    });
+
+    it('Should emit onInitialize on path creation', () => {
+      spyOn(app, 'eventCalled');
+      app.createPath = false;
+
+      fixture.detectChanges();
+
+      app.createPath = true;
+
+      fixture.detectChanges();
+
+      expect(app.eventCalled).toHaveBeenCalledTimes(1);
     });
 
     it('Should create click event handler', async() => {

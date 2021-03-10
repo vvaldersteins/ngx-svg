@@ -20,7 +20,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Globally used variables within the directive.
    */
-  private _polygon: Polygon;
+  private _polygon?: Polygon;
 
   /**
    * Import variables for the polygon directive.
@@ -64,7 +64,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._polygon.remove();
+    this._polygon?.remove();
   }
 
   /**
@@ -121,7 +121,7 @@ export class SvgPolygonDirective implements AfterViewChecked, OnChanges, OnDestr
       .on('mouseout', (evt: MouseEvent) => this.mouseOutEvent.emit(evt)); // Assign mouse out event
 
     // Let's set element in a correct position
-    this.setCorrectPosition();  
+    this.setCorrectPosition();
 
     // Add classes to the polygon
     this.addRemoveClasses(this.classes);

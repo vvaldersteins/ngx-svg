@@ -20,7 +20,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
   /**
    * Globally used variables within the directive.
    */
-  private _ellipse: Ellipse;
+  private _ellipse?: Ellipse;
 
   /**
    * Import variables for the ellipse directive.
@@ -64,7 +64,7 @@ export class SvgEllipseDirective implements AfterViewChecked, OnChanges, OnDestr
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._ellipse.remove();
+    this._ellipse?.remove();
   }
 
   /**

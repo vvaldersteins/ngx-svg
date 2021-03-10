@@ -20,7 +20,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _line: Line;
+  private _line?: Line;
 
   /**
    * Import variables for the line directive.
@@ -65,7 +65,7 @@ export class SvgLineDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._line.remove();
+    this._line?.remove();
   }
 
   /**

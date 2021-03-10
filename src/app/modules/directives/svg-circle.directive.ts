@@ -20,7 +20,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
   /**
    * Globally used variables within the directive.
    */
-  private _circle: Circle;
+  private _circle?: Circle;
 
   /**
    * Import variables for the circle directive.
@@ -65,7 +65,7 @@ export class SvgCircleDirective implements AfterViewChecked, OnChanges, OnDestro
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._circle.remove();
+    this._circle?.remove();
   }
 
   /**

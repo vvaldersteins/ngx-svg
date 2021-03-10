@@ -20,7 +20,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _rect: Rect;
+  private _rect?: Rect;
 
   /**
    * Import variables for the rectangular directive.
@@ -67,7 +67,7 @@ export class SvgRectDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._rect.remove();
+    this._rect?.remove();
   }
 
   /**

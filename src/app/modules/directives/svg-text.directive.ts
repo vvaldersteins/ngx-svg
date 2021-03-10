@@ -20,7 +20,7 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _text: Text;
+  private _text?: Text;
 
   /**
    * Import variables for the text directive.
@@ -65,7 +65,7 @@ export class SvgTextDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._text.remove();
+    this._text?.remove();
   }
 
   /**

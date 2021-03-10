@@ -20,7 +20,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
   /**
    * Globally used variables within the directive.
    */
-  private _image: Image;
+  private _image?: Image;
 
   /**
    * Import variables for the image directive.
@@ -65,7 +65,7 @@ export class SvgImageDirective implements AfterViewChecked, OnDestroy, OnChanges
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._image.remove();
+    this._image?.remove();
   }
 
   /**

@@ -20,7 +20,7 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
   /**
    * Globally used variables within the directive.
    */
-  private _polyline: Polyline;
+  private _polyline?: Polyline;
 
   /**
    * Input variables for the polyline directive.
@@ -64,7 +64,7 @@ export class SvgPolylineDirective implements AfterViewChecked, OnChanges, OnDest
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._polyline.remove();
+    this._polyline?.remove();
   }
 
   /**

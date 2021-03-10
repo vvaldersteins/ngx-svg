@@ -20,7 +20,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
   /**
    * Globally used variables within the directive.
    */
-  private _path: Path;
+  private _path?: Path;
 
   /**
    * Import variables for the path directive.
@@ -66,7 +66,7 @@ export class SvgPathDirective implements AfterViewChecked, OnChanges, OnDestroy 
    * Does all required pre-requisites before destroying the component.
    */
   ngOnDestroy(): void {
-    this._path.remove();
+    this._path?.remove();
   }
 
   /**
